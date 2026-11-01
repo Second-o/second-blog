@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="二次可能 · 实用小工具：JSON 格式化、颜色转换、Base64、时间戳、二维码、Markdown 编辑器。纯前端，离线可用。">
+<title>实用小工具 · 二次可能</title>
+<link rel="icon" href="photo/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="photo/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="photo/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="photo/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 顶部导航栏 -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html"><span class="logo-dot"></span>二次可能</a>
+      <button class="burger" id="burger" aria-label="菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于我</a></li>
+        <li><a href="works.html">作品</a></li>
+        <li><a href="tools.html" class="active">实用小工具</a></li>
+        <li><a href="wed.html">链接导航</a></li>
+        <li><a href="wed.html#dl">软件下载</a></li>
+        <li><a href="contact.html">联系我</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 页头 -->
+  <header class="page-head">
+    <h1>实用小工具</h1>
+    <p>自己写的一些小玩意儿，纯前端、不联网也能用。数据都在你自己的浏览器里算，不会上传。</p>
+  </header>
+
+  <div class="wrap">
+
+    <!-- 工具列表 -->
+    <section class="card">
+      <h2>现在能用的 7 个</h2>
+      <div class="tool-grid">
+
+        <div class="tool-card">
+          <div class="tool-top">
+            <div class="tool-icon">M↓</div>
+            <div class="tool-hd">
+              <div class="tool-name">Markdown 编辑器</div>
+              <div class="tool-sub">实时预览 · 导入导出 · 离线可用</div>
+            </div>
+          </div>
+          <p class="tool-desc">
+            左边写 Markdown，右边立刻看到效果。支持标题、表格、任务清单、代码块等常见语法，
+            也可以把 <code>.md</code> 文件直接拖进来，或者导出成 Markdown 或独立网页。
+          </p>
+          <div class="tool-tags">
+            <span>零依赖</span><span>自动保存</span><span>深色 / 浅色</span>
+          </div>
+          <div class="tool-actions">
+            <a class="tool-open" href="markdown.html">打开编辑器</a>
+            <a class="tool-newtab" href="markdown.html" target="_blank" rel="noopener">在新标签打开 ↗</a>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-top">
+            <div class="tool-icon">{ }</div>
+            <div class="tool-hd">
+              <div class="tool-name">JSON 格式化 / 压缩</div>
+              <div class="tool-sub">美化 · 压缩 · 校验 · 定位错误</div>
+            </div>
+          </div>
+          <p class="tool-desc">
+            粘贴一段 JSON，一键缩进成好读的样子，或者压成一行省空间。
+            写错了不会只丢一句看不懂的报错，会告诉你是第几行第几列出的问题。
+          </p>
+          <div class="tool-tags">
+            <span>2 / 4 空格</span><span>错误定位</span><span>一键复制</span>
+          </div>
+          <div class="tool-actions">
+            <a class="tool-open" href="json.html">打开工具</a>
+            <a class="tool-newtab" href="json.html" target="_blank" rel="noopener">在新标签打开 ↗</a>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-top">
+            <div class="tool-icon" style="background:linear-gradient(135deg,#6F9CFF,#3D5FD9)">B64</div>
+            <div class="tool-hd">
+              <div class="tool-name">Base64 编码解码</div>
+              <div class="tool-sub">中文不乱码 · 文件转码</div>
+            </div>
+          </div>
+          <p class="tool-desc">
+            按 UTF-8 处理，中文和 emoji 都不会变成问号。可以选 URL 安全的写法，
+            也能直接选个文件拿到它的 Base64，图片连 <code>data:</code> 前缀一起导出。
+          </p>
+          <div class="tool-tags">
+            <span>UTF-8</span><span>URL 安全</span><span>文件转码</span>
+          </div>
+          <div class="tool-actions">
+            <a class="tool-open" href="base64.html">打开工具</a>
+            <a class="tool-newtab" href="base64.html" target="_blank" rel="noopener">在新标签打开 ↗</a>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-top">
+            <div class="tool-icon" style="background:linear-gradient(135deg,#E5484D,#A06BFF)">◐</div>
+            <div class="tool-hd">
+              <div class="tool-name">颜色取色与色值转换</div>
+              <div class="tool-sub">HEX / RGB / HSL 互转</div>
+            </div>
+          </div>
+          <p class="tool-desc">
+            改任意一栏，其余几栏跟着变，带透明度调节。顺手算白字黑字的对比度，
+            告诉你这个底色上文字够不够清楚，颜色名和三位简写也认。
+          </p>
+          <div class="tool-tags">
+            <span>取色器</span><span>对比度</span><span>常用色板</span>
+          </div>
+          <div class="tool-actions">
+            <a class="tool-open" href="color.html">打开工具</a>
+            <a class="tool-newtab" href="color.html" target="_blank" rel="noopener">在新标签打开 ↗</a>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-top">
+            <div class="tool-icon" style="background:linear-gradient(135deg,#3DDC97,#12A06A)">⏱</div>
+            <div class="tool-hd">
+              <div class="tool-name">时间戳与日期互转</div>
+              <div class="tool-sub">秒 / 毫秒自动识别</div>
+            </div>
+          </div>
+          <p class="tool-desc">
+            10 位当秒、13 位当毫秒，不用自己数位数。本地时间、UTC、ISO 8601 一起给出，
+            还能反过来把日期转成时间戳，另外附了几个常用时间点。
+          </p>
+          <div class="tool-tags">
+            <span>实时时钟</span><span>UTC</span><span>相对时间</span>
+          </div>
+          <div class="tool-actions">
+            <a class="tool-open" href="timestamp.html">打开工具</a>
+            <a class="tool-newtab" href="timestamp.html" target="_blank" rel="noopener">在新标签打开 ↗</a>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-top">
+            <div class="tool-icon" style="background:linear-gradient(135deg,#2B3A4A,#4A90D9)">▦</div>
+            <div class="tool-hd">
+              <div class="tool-name">二维码生成</div>
+              <div class="tool-sub">PNG / SVG · 中文支持</div>
+            </div>
+          </div>
+          <p class="tool-desc">
+            输入链接或文字，立刻生成二维码，能调尺寸、纠错级别和留白。
+            支持下载 PNG、下载矢量 SVG，也能直接复制图片粘贴到别处。
+          </p>
+          <div class="tool-tags">
+            <span>矢量 SVG</span><span>UTF-8</span><span>本地生成</span>
+          </div>
+          <div class="tool-actions">
+            <a class="tool-open" href="qr.html">打开工具</a>
+            <a class="tool-newtab" href="qr.html" target="_blank" rel="noopener">在新标签打开 ↗</a>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-top">
+            <div class="tool-icon" style="background:linear-gradient(135deg,#38BDF8,#0E7490)">0x</div>
+            <div class="tool-hd">
+              <div class="tool-name">进制转换</div>
+              <div class="tool-sub">2–36 任意进制 · 大整数精确</div>
+            </div>
+          </div>
+          <p class="tool-desc">
+            二进制、八进制、十进制、十六进制一起显示，改哪一栏都行，也能切到 2–36 任意进制。
+            除了数字，还能按字节看二进制位；用 BigInt 计算，2<sup>64</sup> 这种大数也不会丢精度。
+          </p>
+          <div class="tool-tags">
+            <span>任意进制</span><span>按字节看</span><span>大整数</span>
+          </div>
+          <div class="tool-actions">
+            <a class="tool-open" href="base-conv.html">打开工具</a>
+            <a class="tool-newtab" href="base-conv.html" target="_blank" rel="noopener">在新标签打开 ↗</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 说明 -->
+    <section class="card">
+      <h2>关于这些小工具</h2>
+      <p>这些页面都是单个 HTML 文件，把解析逻辑、界面样式、交互全部塞在一个文件里，不引用任何外网的 CDN 或字体，断网、拷到 U 盘、丢进任意静态空间都能直接打开。</p>
+      <p>所有计算都在你的浏览器里完成，粘进来的内容不会发到任何服务器。写的时候顺手整理了几个容易踩的坑：Base64 和二维码都先按 UTF-8 转字节再处理，中文才不会坏；时间戳按位数自动判断秒还是毫秒；颜色工具用对比度帮你确认文字看不看得清。</p>
+    </section>
+
+  </div>
+
+  <!-- 页脚 -->
+  <footer>
+    © 2026 二次可能 · 保留所有权利 &nbsp;|&nbsp; 用 HTML + CSS + JavaScript 手写
+    <div style="margin-top:8px;font-size:12px;">
+      <a href="index.html">首页</a> ·
+      <a href="about.html">关于我</a> ·
+      <a href="works.html">作品</a> ·
+      <a href="tools.html">实用小工具</a> ·
+      <a href="contact.html">联系我</a>
+    </div>
+  </footer>
+
+<script defer src="js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="时间戳与日期互转，自动识别秒和毫秒，同时给出本地时间与 UTC。">
+<title>时间戳与日期互转 · 二次可能</title>
+<link rel="icon" href="photo/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="photo/favicon-32.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html"><span class="logo-dot"></span>二次可能</a>
+      <button class="burger" id="burger" aria-label="菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于我</a></li>
+        <li><a href="works.html">作品</a></li>
+        <li><a href="tools.html" class="active">实用小工具</a></li>
+        <li><a href="wed.html">链接导航</a></li>
+        <li><a href="wed.html#dl">软件下载</a></li>
+        <li><a href="contact.html">联系我</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page-head">
+    <h1>时间戳与日期互转</h1>
+    <p>10 位当秒、13 位当毫秒，不用自己数；本地时间和 UTC 一起给你。</p>
+  </header>
+
+  <div class="tool-main">
+
+    <section class="tool-panel now-panel">
+      <div class="now-label">现在</div>
+      <div class="now-clock" id="clock">--:--:--</div>
+      <div class="now-ts">
+        <button class="ts-chip" id="copySec" title="点击复制">
+          <span class="ts-kind">秒</span>
+          <span class="ts-val" id="nowSec">—</span>
+        </button>
+        <button class="ts-chip" id="copyMs" title="点击复制">
+          <span class="ts-kind">毫秒</span>
+          <span class="ts-val" id="nowMs">—</span>
+        </button>
+      </div>
+      <p class="hint" id="tzInfo"></p>
+    </section>
+
+    <section class="tool-panel">
+      <h2>时间戳 → 日期</h2>
+      <label class="fl" for="tsIn">粘贴时间戳（秒或毫秒，自动识别）</label>
+      <div class="bar" style="margin-top:8px">
+        <input id="tsIn" class="inp mono" spellcheck="false" autocomplete="off" placeholder="例如 1792918800 或 1792918800000">
+        <button class="tb" data-act="tsNow">用现在的时间</button>
+        <button class="tb ghost" data-act="tsClear">清空</button>
+      </div>
+      <div class="msg" id="msg1"></div>
+      <div class="val-list" id="out1"></div>
+    </section>
+
+    <section class="tool-panel">
+      <h2>日期 → 时间戳</h2>
+      <label class="fl" for="dtIn">选一个本地时间</label>
+      <div class="bar" style="margin-top:8px">
+        <input id="dtIn" type="datetime-local" class="inp mono" step="1">
+        <button class="tb" data-act="dtNow">用现在的时间</button>
+        <button class="tb ghost" data-act="dtClear">清空</button>
+      </div>
+      <div class="msg" id="msg2"></div>
+      <div class="val-list" id="out2"></div>
+    </section>
+
+    <section class="tool-panel">
+      <h2>几个常用的时间点</h2>
+      <p class="hint">按你电脑所在的时区算，点右边可以复制对应的时间戳。</p>
+      <div class="val-list" id="out3"></div>
+    </section>
+
+    <section class="tool-panel">
+      <h2>说明</h2>
+      <p class="hint">
+        Unix 时间戳是从 1970-01-01 00:00:00 UTC 起算的秒数，本身没有时区，时区只影响显示。<br>
+        JS 里用毫秒，所以常见的 13 位就是 10 位秒数乘 1000；超过 13 位的值可能是纳秒，这里会提示。<br>
+        本地时间按浏览器所在时区换算，换台机器看可能不一样，跨时区对接时优先用 UTC 或 ISO 8601。
+      </p>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2026 二次可能 · 保留所有权利 &nbsp;|&nbsp; 用 HTML + CSS + JavaScript 手写
+    <div style="margin-top:8px;font-size:12px;">
+      <a href="index.html">首页</a> ·
+      <a href="about.html">关于我</a> ·
+      <a href="works.html">作品</a> ·
+      <a href="tools.html">实用小工具</a> ·
+      <a href="contact.html">联系我</a>
+    </div>
+  </footer>
+
+<script defer src="js/site.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+
+  function fmtLocal(d) {
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) +
+      ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+  }
+  function fmtUtc(d) {
+    return d.getUTCFullYear() + '-' + pad(d.getUTCMonth() + 1) + '-' + pad(d.getUTCDate()) +
+      ' ' + pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()) + ':' + pad(d.getUTCSeconds());
+  }
+  var WEEK = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+
+  function relative(d) {
+    var diff = Date.now() - d.getTime();
+    var abs = Math.abs(diff);
+    var future = diff < 0;
+    var units = [
+      [1000 * 60 * 60 * 24 * 365, '年'],
+      [1000 * 60 * 60 * 24 * 30, '个月'],
+      [1000 * 60 * 60 * 24, '天'],
+      [1000 * 60 * 60, '小时'],
+      [1000 * 60, '分钟'],
+      [1000, '秒']
+    ];
+    if (abs < 2000) return '就是现在';
+    for (var i = 0; i < units.length; i++) {
+      if (abs >= units[i][0]) {
+        var n = Math.floor(abs / units[i][0]);
+        return n + ' ' + units[i][1] + (future ? '后' : '前');
+      }
+    }
+    return '';
+  }
+
+  function tzName() {
+    try {
+      return Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    } catch (e) { return ''; }
+  }
+
+  var offsetMin = -new Date().getTimezoneOffset();
+  var offsetStr = 'UTC' + (offsetMin >= 0 ? '+' : '-') +
+    pad(Math.floor(Math.abs(offsetMin) / 60)) + ':' + pad(Math.abs(offsetMin) % 60);
+
+  document.getElementById('tzInfo').textContent =
+    '你是 ' + (tzName() || '本地时区') + '（' + offsetStr + '），下面的本地时间都按这个时区显示。';
+
+  // ---------- 顶部时钟 ----------
+  var elClock = document.getElementById('clock');
+  var elSec = document.getElementById('nowSec');
+  var elMs = document.getElementById('nowMs');
+
+  function tick() {
+    var d = new Date();
+    elClock.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+    elSec.textContent = Math.floor(d.getTime() / 1000);
+    elMs.textContent = d.getTime();
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  function copyText(text, okEl) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        flash(okEl, '已复制 ' + text);
+      }, function () {
+        flash(okEl, '复制失败，请手动复制', true);
+      });
+    } else {
+      flash(okEl, '当前浏览器不支持自动复制', true);
+    }
+  }
+  function flash(el, text, bad) {
+    el.className = 'msg show ' + (bad ? 'err' : 'ok');
+    el.textContent = text;
+    clearTimeout(el._t);
+    el._t = setTimeout(function () { el.className = 'msg'; el.textContent = ''; }, 2200);
+  }
+
+  document.getElementById('copySec').addEventListener('click', function () {
+    copyText(String(Math.floor(Date.now() / 1000)), document.getElementById('msg1'));
+  });
+  document.getElementById('copyMs').addEventListener('click', function () {
+    copyText(String(Date.now()), document.getElementById('msg1'));
+  });
+
+  // ---------- 渲染结果行 ----------
+  function rows(el, items) {
+    el.innerHTML = '';
+    items.forEach(function (it) {
+      if (!it) return;
+      var row = document.createElement('div');
+      row.className = 'val-row';
+      var lab = document.createElement('span');
+      lab.className = 'val-label';
+      lab.textContent = it[0];
+      var code = document.createElement('code');
+      code.className = 'val-code';
+      code.textContent = it[1];
+      var btn = document.createElement('button');
+      btn.className = 'tb ghost tiny';
+      btn.textContent = '复制';
+      btn.addEventListener('click', function () {
+        copyText(it[1], document.getElementById(it[2] || 'msg1'));
+      });
+      row.appendChild(lab); row.appendChild(code); row.appendChild(btn);
+      el.appendChild(row);
+    });
+  }
+
+  // ---------- 时间戳 → 日期 ----------
+  var tsIn = document.getElementById('tsIn');
+  var out1 = document.getElementById('out1');
+  var msg1 = document.getElementById('msg1');
+
+  function showMsg(el, kind, text) {
+    el.className = 'msg show ' + kind;
+    el.textContent = text;
+  }
+  function hideMsg(el) { el.className = 'msg'; el.textContent = ''; }
+
+  function tsToDate() {
+    var raw = tsIn.value.trim();
+    if (!raw) { out1.innerHTML = ''; hideMsg(msg1); return; }
+    if (!/^-?\d+$/.test(raw)) {
+      out1.innerHTML = '';
+      showMsg(msg1, 'err', '时间戳应该是一串纯数字');
+      return;
+    }
+    var digits = raw.replace('-', '').length;
+    var n = Number(raw);
+    var ms;
+    var note = '';
+    if (digits <= 10) { ms = n * 1000; note = '按秒解析'; }
+    else if (digits <= 13) { ms = n; note = '按毫秒解析'; }
+    else {
+      out1.innerHTML = '';
+      showMsg(msg1, 'err', '位数太多（' + digits + ' 位），常见的是 10 位秒或 13 位毫秒');
+      return;
+    }
+    var d = new Date(ms);
+    if (isNaN(d.getTime())) {
+      out1.innerHTML = '';
+      showMsg(msg1, 'err', '这个时间戳超出了能表示的范围');
+      return;
+    }
+    hideMsg(msg1);
+    rows(out1, [
+      ['本地时间', fmtLocal(d)],
+      ['UTC 时间', fmtUtc(d)],
+      ['ISO 8601', d.toISOString()],
+      ['星期', WEEK[d.getDay()]],
+      ['相对现在', relative(d)],
+      ['秒', String(Math.floor(ms / 1000))],
+      ['毫秒', String(ms)]
+    ]);
+    showMsg(msg1, 'ok', note + '，共 ' + digits + ' 位数字');
+  }
+
+  tsIn.addEventListener('input', tsToDate);
+
+  // ---------- 日期 → 时间戳 ----------
+  var dtIn = document.getElementById('dtIn');
+  var out2 = document.getElementById('out2');
+  var msg2 = document.getElementById('msg2');
+
+  function toLocalInput(d) {
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) +
+      'T' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+  }
+
+  function dateToTs() {
+    if (!dtIn.value) { out2.innerHTML = ''; hideMsg(msg2); return; }
+    var d = new Date(dtIn.value);
+    if (isNaN(d.getTime())) {
+      out2.innerHTML = '';
+      showMsg(msg2, 'err', '这个日期没看懂');
+      return;
+    }
+    hideMsg(msg2);
+    var ms = d.getTime();
+    rows(out2, [
+      ['秒', String(Math.floor(ms / 1000))],
+      ['毫秒', String(ms)],
+      ['ISO 8601', d.toISOString()],
+      ['UTC 时间', fmtUtc(d)],
+      ['星期', WEEK[d.getDay()]],
+      ['相对现在', relative(d)]
+    ]);
+  }
+  dtIn.addEventListener('input', dateToTs);
+
+  document.querySelectorAll('.tool-panel').forEach(function (panel, i) {
+    panel.addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-act]');
+      if (!b) return;
+      var a = b.getAttribute('data-act');
+      if (a === 'tsNow') { tsIn.value = String(Math.floor(Date.now() / 1000)); tsToDate(); }
+      if (a === 'tsClear') { tsIn.value = ''; out1.innerHTML = ''; hideMsg(msg1); }
+      if (a === 'dtNow') { dtIn.value = toLocalInput(new Date()); dateToTs(); }
+      if (a === 'dtClear') { dtIn.value = ''; out2.innerHTML = ''; hideMsg(msg2); }
+    });
+  });
+
+  // ---------- 常用时间点 ----------
+  function refPoints() {
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var dow = (now.getDay() + 6) % 7; // 周一为一周开始
+    var monday = new Date(today.getTime() - dow * 86400000);
+    var month = new Date(now.getFullYear(), now.getMonth(), 1);
+    var year = new Date(now.getFullYear(), 0, 1);
+    var items = [
+      ['今天 00:00', today],
+      ['本周一 00:00', monday],
+      ['本月 1 日 00:00', month],
+      ['今年 1 月 1 日', year]
+    ];
+    return items.map(function (it) {
+      var d = it[1];
+      return [it[0] + '（' + fmtLocal(d).slice(0, 10) + '）',
+        String(Math.floor(d.getTime() / 1000)), 'msg3'];
+    });
+  }
+  var out3 = document.getElementById('out3');
+  // 让复制提示有一条独立的消息区
+  var msg3 = document.createElement('div');
+  msg3.className = 'msg';
+  msg3.id = 'msg3';
+  out3.parentNode.insertBefore(msg3, out3.nextSibling);
+  rows(out3, refPoints());
+
+  // 首次默认填当前时间，方便直接看到效果
+  dtIn.value = toLocalInput(new Date());
+  dateToTs();
+})();
+</script>
+</body>
+</html>

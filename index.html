@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="二次可能 · 在校学生 / B站UP主 / 编程爱好者，从图形化编程到开源硬件。">
+<title>二次可能 · 首页</title>
+<link rel="icon" href="photo/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="photo/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="photo/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="photo/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 顶部导航栏 -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html"><span class="logo-dot"></span>二次可能</a>
+      <button class="burger" id="burger" aria-label="菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">首页</a></li>
+        <li><a href="about.html">关于我</a></li>
+        <li><a href="works.html">作品</a></li>
+        <li><a href="tools.html">实用小工具</a></li>
+        <li><a href="wed.html">链接导航</a></li>
+        <li><a href="wed.html#dl">软件下载</a></li>
+        <li><a href="contact.html">联系我</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 头部 -->
+  <header class="hero">
+    <div class="avatar">
+      <img src="photo/avatar.jpg" alt="二次可能的头像" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:50%;display:block;image-rendering:pixelated;">
+    </div>
+    <h1>二次可能</h1>
+    <p class="tagline">从图形化编程到开源硬件，把想法一个个做成能跑起来的东西 🚀</p>
+    <span class="tag">在校学生 · B站UP主 · 编程爱好者</span>
+  </header>
+
+  <div class="wrap">
+
+    <!-- 欢迎 -->
+    <section class="card">
+      <h2>你好，欢迎来逛</h2>
+      <p>我是二次可能，一名在校学生，也是 B 站的同名 UP 主。编程对我来说是爱好——从编程猫 Kitten、Scratch 这些图形化工具入坑，现在更喜欢自己动手，把脑子里的想法做成真正能跑起来的东西。</p>
+      <p>这个网站是我从零手写的，背景是 Minecraft 里的雨夜小屋，图标是村民。下面三个入口，可以看看我的介绍、作品，或者直接找到我。</p>
+
+      <div class="entry-grid">
+        <a class="entry-card" href="about.html">
+          <div class="entry-icon">🧑‍💻</div>
+          <div class="entry-title">关于我</div>
+          <div class="entry-desc">从图形化编程到开源硬件的成长路径，以及现在在折腾什么</div>
+        </a>
+        <a class="entry-card" href="works.html">
+          <div class="entry-icon">🎬</div>
+          <div class="entry-title">作品</div>
+          <div class="entry-desc">B 站投稿的嵌入式播放器，点开就能直接看</div>
+        </a>
+        <a class="entry-card" href="contact.html">
+          <div class="entry-icon">💬</div>
+          <div class="entry-title">联系我</div>
+          <div class="entry-desc">QQ、邮箱、GitHub 与 B 站，随时可以找我聊</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 小提示 -->
+    <section class="card">
+      <h2>一个藏在控制台里的小彩蛋</h2>
+      <p>按 F12 打开开发者工具，控制台里有个用字符画写成的大大的 SECOND，还有一句留给会折腾的人的话 👀</p>
+      <p>另外，输入 <b>eat_fish_together()</b> 还能在控制台里玩一个「一起吃小鱼」的小游戏，这是我接入的一个开源项目。</p>
+    </section>
+
+  </div>
+
+  <!-- 页脚 -->
+  <footer>
+    © 2026 二次可能 · 保留所有权利 &nbsp;|&nbsp; 用 HTML + CSS + JavaScript 手写
+    <div style="margin-top:8px;font-size:12px;">
+      <a href="index.html">首页</a> ·
+      <a href="about.html">关于我</a> ·
+      <a href="works.html">作品</a> ·
+      <a href="tools.html">实用小工具</a> ·
+      <a href="contact.html">联系我</a>
+    </div>
+  </footer>
+
+<script defer src="js/eat-fish-together.js"></script>
+<script defer src="js/site.js"></script>
+</body>
+</html>

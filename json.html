@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="在线 JSON 格式化、压缩与校验，出错会指出大概的行列位置。纯前端，数据不上传。">
+<title>JSON 格式化 / 压缩 · 二次可能</title>
+<link rel="icon" href="photo/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="photo/favicon-32.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html"><span class="logo-dot"></span>二次可能</a>
+      <button class="burger" id="burger" aria-label="菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于我</a></li>
+        <li><a href="works.html">作品</a></li>
+        <li><a href="tools.html" class="active">实用小工具</a></li>
+        <li><a href="wed.html">链接导航</a></li>
+        <li><a href="wed.html#dl">软件下载</a></li>
+        <li><a href="contact.html">联系我</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page-head">
+    <h1>JSON 格式化 / 压缩</h1>
+    <p>粘贴 JSON，一键美化或压成一行；写错了会告诉你大概在第几行第几列。</p>
+  </header>
+
+  <div class="tool-main">
+
+    <section class="tool-panel">
+      <div class="tool-grid2">
+        <div>
+          <label class="fl" for="in">输入</label>
+          <textarea id="in" class="ta" spellcheck="false" placeholder='{"name":"二次可能","tags":["博客","工具"],"ok":true}'></textarea>
+        </div>
+        <div>
+          <label class="fl" for="out">结果</label>
+          <textarea id="out" class="ta" spellcheck="false" readonly placeholder="点下面的按钮，结果会出现在这里"></textarea>
+        </div>
+      </div>
+
+      <div class="bar">
+        <button class="tb" data-act="pretty2">格式化（2 空格）</button>
+        <button class="tb" data-act="pretty4">格式化（4 空格）</button>
+        <button class="tb" data-act="minify">压缩成一行</button>
+        <button class="tb ghost" data-act="check">只校验</button>
+        <button class="tb ghost" data-act="copy">复制结果</button>
+        <button class="tb ghost" data-act="swap">结果转为输入</button>
+        <button class="tb ghost" data-act="clear">清空</button>
+        <button class="tb ghost" data-act="sample">填个示例</button>
+      </div>
+
+      <div class="msg" id="msg"></div>
+      <p class="hint" id="stat">等待输入…</p>
+    </section>
+
+    <section class="tool-panel">
+      <h2>小提示</h2>
+      <p class="hint">
+        标准 JSON 不支持注释和末尾多余的逗号，遇到这类写法会直接报错，删掉就能通过。<br>
+        超过 2<sup>53</sup> 的超大整数在 JS 里会丢精度，这种数据建议按字符串存。<br>
+        所有处理都在你自己的浏览器里完成，内容不会发到任何服务器。
+      </p>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2026 二次可能 · 保留所有权利 &nbsp;|&nbsp; 用 HTML + CSS + JavaScript 手写
+    <div style="margin-top:8px;font-size:12px;">
+      <a href="index.html">首页</a> ·
+      <a href="about.html">关于我</a> ·
+      <a href="works.html">作品</a> ·
+      <a href="tools.html">实用小工具</a> ·
+      <a href="contact.html">联系我</a>
+    </div>
+  </footer>
+
+<script defer src="js/site.js"></script>
+<script>
+(function () {
+  'use strict';
+  var input = document.getElementById('in');
+  var out = document.getElementById('out');
+  var msg = document.getElementById('msg');
+  var stat = document.getElementById('stat');
+
+  function show(kind, text) {
+    msg.className = 'msg show ' + kind;
+    msg.textContent = text;
+  }
+  function hide() {
+    msg.className = 'msg';
+    msg.textContent = '';
+  }
+
+  // 从报错信息里找出位置，换算成行列
+  function locate(err, text) {
+    var s = String((err && err.message) || err);
+    var m = /position\s+(\d+)/i.exec(s);
+    if (m) {
+      var idx = parseInt(m[1], 10);
+      var before = text.slice(0, idx);
+      var line = before.split('\n').length;
+      var col = idx - before.lastIndexOf('\n');
+      return '第 ' + line + ' 行第 ' + col + ' 列附近';
+    }
+    m = /line\s+(\d+)\s+column\s+(\d+)/i.exec(s);
+    if (m) return '第 ' + m[1] + ' 行第 ' + m[2] + ' 列附近';
+    return '';
+  }
+
+  function humanErr(err, text) {
+    var s = String((err && err.message) || err);
+    var pos = locate(err, text);
+    var zh = 'JSON 格式有误';
+    if (/Unexpected end of (JSON )?input/i.test(s)) zh = '内容没写完，可能少了右括号或引号';
+    else if (/Unexpected token/i.test(s)) zh = '出现了不该出现的字符';
+    else if (/Expected property name/i.test(s)) zh = '对象里的键需要加双引号';
+    else if (/Expected .* after/i.test(s)) zh = '缺少逗号或括号';
+    else if (/is not valid JSON/i.test(s)) zh = '这不是合法的 JSON';
+    else if (/Unexpected non-whitespace/i.test(s)) zh = 'JSON 结束后还有多余内容';
+    return zh + (pos ? '（' + pos + '）' : '') + '：' + s;
+  }
+
+  function parse() {
+    var text = input.value;
+    if (!text.trim()) {
+      out.value = '';
+      stat.textContent = '等待输入…';
+      hide();
+      return null;
+    }
+    try {
+      var data = JSON.parse(text);
+      hide();
+      return data;
+    } catch (err) {
+      out.value = '';
+      show('err', humanErr(err, text));
+      stat.textContent = '解析失败，共 ' + text.length + ' 个字符';
+      return undefined;
+    }
+  }
+
+  function put(text) {
+    out.value = text;
+    stat.textContent = '输入 ' + input.value.length + ' 字符 → 输出 ' +
+      text.length + ' 字符' + (input.value.length ? '（' + Math.round(text.length / input.value.length * 100) + '%）' : '');
+  }
+
+  var acts = {
+    pretty2: function () {
+      var d = parse();
+      if (d === undefined) return;
+      if (d === null) return;
+      put(JSON.stringify(d, null, 2));
+      show('ok', '已格式化，缩进 2 个空格');
+    },
+    pretty4: function () {
+      var d = parse();
+      if (d === undefined || d === null) return;
+      put(JSON.stringify(d, null, 4));
+      show('ok', '已格式化，缩进 4 个空格');
+    },
+    minify: function () {
+      var d = parse();
+      if (d === undefined || d === null) return;
+      put(JSON.stringify(d));
+      show('ok', '已压缩成一行，去掉了所有多余空白');
+    },
+    check: function () {
+      var d = parse();
+      if (d === undefined) return;
+      if (d === null) { show('warn', '还没有内容可以校验'); return; }
+      var type = Array.isArray(d) ? '数组（' + d.length + ' 项）'
+        : (d && typeof d === 'object') ? '对象（' + Object.keys(d).length + ' 个键）'
+        : typeof d;
+      show('ok', '格式正确，顶层是' + type);
+      stat.textContent = '共 ' + input.value.length + ' 个字符';
+    },
+    copy: function () {
+      var text = out.value;
+      if (!text) { show('warn', '结果还是空的，先点一个格式化按钮'); return; }
+      var done = function (ok) {
+        if (ok) show('ok', '结果已复制到剪贴板');
+        else show('err', '复制失败，请手动选中结果后复制');
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+      } else {
+        out.removeAttribute('readonly');
+        out.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+        out.setAttribute('readonly', 'readonly');
+        done(ok);
+      }
+    },
+    swap: function () {
+      if (!out.value) { show('warn', '结果还是空的，没有可以搬回去的内容'); return; }
+      input.value = out.value;
+      hide();
+      stat.textContent = '已把结果移回输入框，共 ' + input.value.length + ' 个字符';
+    },
+    clear: function () {
+      input.value = '';
+      out.value = '';
+      hide();
+      stat.textContent = '已清空';
+    },
+    sample: function () {
+      input.value = JSON.stringify({
+        name: '二次可能',
+        site: '个人博客',
+        tags: ['HTML', 'CSS', 'JavaScript'],
+        works: [{ title: '嵌入式播放器', year: 2026 }],
+        tip: '点上面的按钮试试格式化'
+      }, null, 1).replace(/\n {1}/g, '\n  ');
+      // 故意留一点紧凑格式，方便演示格式化效果
+      input.value = '{"name":"二次可能","tags":["HTML","CSS","JavaScript"],"works":[{"title":"嵌入式播放器","year":2026}],"ok":true}';
+      out.value = '';
+      hide();
+      stat.textContent = '已填入示例，试试「格式化（2 空格）」';
+    }
+  };
+
+  document.querySelector('.tool-panel .bar').addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-act]');
+    if (!btn) return;
+    var fn = acts[btn.getAttribute('data-act')];
+    if (fn) fn();
+  });
+
+  input.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      acts.pretty2();
+    }
+  });
+})();
+</script>
+</body>
+</html>

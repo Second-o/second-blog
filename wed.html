@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="二次可能 · 实用链接导航：常用网站、AI 工具、正版游戏平台入口。带实时筛选，一页找齐。">
+<title>实用链接导航 · 二次可能</title>
+<link rel="icon" href="photo/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="photo/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="photo/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="photo/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ===== 链接导航页专用（作用域限定 .lk-*，不影响其它页面） ===== */
+.lk-search{
+  display:flex;gap:10px;align-items:center;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 18px;box-shadow:var(--shadow);margin-bottom:18px;
+}
+.lk-search input{
+  flex:1;border:0;outline:0;background:transparent;
+  font-size:15px;color:var(--text);font-family:inherit;
+}
+.lk-search input::placeholder{color:var(--text-soft);}
+.lk-search .lk-clear{
+  border:1px solid var(--line);background:#fff;color:var(--text-soft);
+  border-radius:999px;padding:5px 14px;font-size:13px;cursor:pointer;
+  font-family:inherit;transition:all .2s ease;
+}
+.lk-search .lk-clear:hover{background:var(--blue-soft);color:var(--blue-dark);border-color:var(--blue-soft);}
+
+.lk-sec{margin-bottom:26px;}
+.lk-sec-hd{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.lk-sec-hd h2{font-size:20px;color:var(--blue-dark);}
+.lk-count{
+  font-size:12px;color:var(--blue-dark);background:var(--blue-soft);
+  border-radius:999px;padding:2px 10px;font-weight:500;
+}
+.lk-sec-hd p{flex-basis:100%;font-size:14px;color:var(--text-soft);margin-top:-2px;}
+
+.lk-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:12px;
+}
+.lk-item{
+  display:flex;gap:12px;align-items:flex-start;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:14px 16px;text-decoration:none;color:var(--text);
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.lk-item:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow);
+  border-color:var(--blue-soft);
+}
+.lk-badge{
+  flex:0 0 40px;width:40px;height:40px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;letter-spacing:.3px;
+  background:var(--blue-soft);color:var(--blue-dark);
+}
+.lk-badge.a{background:#FFF1DE;color:#A9631C;}
+.lk-badge.g{background:#E7F7EC;color:#1E7A46;}
+.lk-badge.p{background:#EEE9FC;color:#5B3FB5;}
+.lk-badge.l{background:#FDE8F0;color:#A83566;}
+  .lk-badge.c{background:#E2F4F8;color:#116B7A;}
+  .lk-badge.d{background:#E8EDFA;color:#2F4A9E;}
+  .lk-item.lk-dl{cursor:default;}
+  .lk-sub{font-size:12px;color:var(--text-soft);margin-bottom:5px;}
+  .lk-acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:9px;}
+  .lk-acts .lk-btn{display:inline-flex;align-items:center;background:var(--blue-soft);color:var(--blue-dark);border-radius:8px;padding:5px 11px;font-size:12.5px;font-weight:600;text-decoration:none;transition:all .2s ease;}
+  .lk-acts .lk-btn:hover{background:var(--blue-dark);color:#fff;}
+  .lk-acts .lk-btn .arw{font-size:13px;opacity:.9;margin-right:2px;}
+  .lk-acts .lk-ghost{font-size:12.5px;color:var(--text-soft);text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:4px 10px;transition:all .2s ease;}
+  .lk-acts .lk-ghost:hover{color:var(--blue-dark);border-color:var(--blue-soft);background:var(--blue-soft);}
+  .lk-alt{margin-top:7px;padding-top:7px;border-top:1px dashed var(--line);font-size:12px;color:var(--text-soft);line-height:1.6;}
+  .lk-alt a{color:var(--blue-dark);text-decoration:none;}
+  .lk-alt a:hover{text-decoration:underline;}
+  .lk-subhd{display:flex;align-items:center;gap:8px;margin:22px 0 10px;}
+  .lk-subhd h3{font-size:15px;color:var(--blue-dark);}
+  .lk-subhd .lk-count{font-size:11px;padding:1px 8px;}
+  .lk-filter{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:14px 0 2px;}
+  .lk-filter button{border:1px solid var(--line);background:#fff;color:var(--text-soft);border-radius:999px;padding:5px 13px;font-size:13px;cursor:pointer;font-family:inherit;transition:all .18s ease;}
+  .lk-filter button:hover{border-color:var(--blue-soft);color:var(--blue-dark);}
+  .lk-filter button.on{background:var(--blue-dark);border-color:var(--blue-dark);color:#fff;font-weight:600;}
+  .lk-filter .lk-hint{font-size:12px;color:var(--text-soft);}
+.lk-body{min-width:0;}
+.lk-name{
+  font-size:15px;font-weight:600;margin-bottom:3px;
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+}
+.lk-desc{font-size:13px;color:var(--text-soft);line-height:1.55;}
+.lk-tag{
+  font-size:11px;font-weight:500;color:#1E7A46;background:#E7F7EC;
+  border-radius:6px;padding:1px 6px;
+}
+.lk-tag.free{color:#A9631C;background:#FFF1DE;}
+
+.lk-empty{
+  display:none;text-align:center;color:var(--text-soft);
+  padding:40px 20px;font-size:15px;
+}
+.lk-empty.show{display:block;}
+
+.lk-note{
+  font-size:13px;color:var(--text-soft);line-height:1.7;
+  background:var(--blue-soft);border-radius:12px;padding:14px 18px;
+}
+
+@media (max-width:600px){
+  .lk-grid{grid-template-columns:1fr;}
+  .lk-search{padding:12px 14px;}
+  .lk-subhd{margin:16px 0 9px;}
+  .lk-acts .lk-btn{font-size:12px;padding:5px 10px;}
+}
+</style>
+</head>
+<body>
+
+  <!-- 顶部导航栏 -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html"><span class="logo-dot"></span>二次可能</a>
+      <button class="burger" id="burger" aria-label="菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于我</a></li>
+        <li><a href="works.html">作品</a></li>
+        <li><a href="tools.html">实用小工具</a></li>
+        <li><a href="wed.html" class="active">链接导航</a></li>
+        <li><a href="wed.html#dl">软件下载</a></li>
+        <li><a href="contact.html">联系我</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 页头 -->
+  <header class="page-head">
+    <h1>实用链接导航</h1>
+    <p>平时常用的网站、顺手的 AI 工具、写代码用的编译器和编辑器、买游戏的正规入口，还有聊天工具、出行购物这类生活服务，以及常用软件的官方下载入口，都放在这一页。上面的搜索框可以直接筛，输入「翻译」「图片」「独立游戏」都能查。</p>
+  </header>
+
+  <div class="wrap">
+
+    <!-- 搜索 -->
+    <div class="lk-search">
+      <input id="lkSearch" type="search" placeholder="搜一下：微信 / 编译器 / Chrome / 外卖 …" autocomplete="off" aria-label="筛选链接">
+      <button class="lk-clear" id="lkClear" type="button">清空</button>
+    </div>
+
+    <div class="lk-empty" id="lkEmpty">没有匹配的链接，换个关键词试试。</div>
+
+    <!-- 一、常用网站 -->
+    <section class="lk-sec" data-sec>
+      <div class="lk-sec-hd">
+        <h2>常用网站</h2>
+        <span class="lk-count">18 个</span>
+        <p>搜索、百科、社区、开发文档这些天天要开的东西。</p>
+      </div>
+      <div class="lk-grid">
+
+        <a class="lk-item" href="https://www.bing.com" target="_blank" rel="noopener">
+          <div class="lk-badge">B</div>
+          <div class="lk-body">
+            <div class="lk-name">必应</div>
+            <div class="lk-desc">搜索结果干净，图片搜索和英文资料都比较好用。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.baidu.com" target="_blank" rel="noopener">
+          <div class="lk-badge">百</div>
+          <div class="lk-body">
+            <div class="lk-name">百度</div>
+            <div class="lk-desc">查国内资讯、贴吧、地图，习惯性第一站。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://zh.wikipedia.org" target="_blank" rel="noopener">
+          <div class="lk-badge">W</div>
+          <div class="lk-body">
+            <div class="lk-name">维基百科</div>
+            <div class="lk-desc">查概念、查人物、查来龙去脉，参考文献能顺着往下看。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.zhihu.com" target="_blank" rel="noopener">
+          <div class="lk-badge">知</div>
+          <div class="lk-body">
+            <div class="lk-name">知乎</div>
+            <div class="lk-desc">长回答里有经验，也有广告，挑着看。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.bilibili.com" target="_blank" rel="noopener">
+          <div class="lk-badge">B</div>
+          <div class="lk-body">
+            <div class="lk-name">哔哩哔哩</div>
+            <div class="lk-desc">学技术、看教程、找纪录片，顺便浪费时间。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://github.com" target="_blank" rel="noopener">
+          <div class="lk-badge">G</div>
+          <div class="lk-body">
+            <div class="lk-name">GitHub</div>
+            <div class="lk-desc">代码托管、开源项目、Issue 里常有真答案。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://developer.mozilla.org/zh-CN/" target="_blank" rel="noopener">
+          <div class="lk-badge">MDN</div>
+          <div class="lk-body">
+            <div class="lk-name">MDN 文档</div>
+            <div class="lk-desc">HTML / CSS / JS 的权威说明，有中文版。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://caniuse.com" target="_blank" rel="noopener">
+          <div class="lk-badge">CI</div>
+          <div class="lk-body">
+            <div class="lk-name">Can I use</div>
+            <div class="lk-desc">查 CSS / JS 特性在各浏览器的支持情况。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://regex101.com" target="_blank" rel="noopener">
+          <div class="lk-badge">.*</div>
+          <div class="lk-body">
+            <div class="lk-name">Regex101</div>
+            <div class="lk-desc">正则实时调试，逐段解释每一步匹配了什么。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.runoob.com" target="_blank" rel="noopener">
+          <div class="lk-badge">菜</div>
+          <div class="lk-body">
+            <div class="lk-name">菜鸟教程</div>
+            <div class="lk-desc">入门查语法够用，例子短、上手快。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://juejin.cn" target="_blank" rel="noopener">
+          <div class="lk-badge">掘</div>
+          <div class="lk-body">
+            <div class="lk-name">掘金</div>
+            <div class="lk-desc">国内前端 / 后端技术文章，踩坑记录比较多。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://stackoverflow.com" target="_blank" rel="noopener">
+          <div class="lk-badge">SO</div>
+          <div class="lk-body">
+            <div class="lk-name">Stack Overflow</div>
+            <div class="lk-desc">报错信息直接粘进来搜，十次有六次能对上。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.processon.com" target="_blank" rel="noopener">
+          <div class="lk-badge">图</div>
+          <div class="lk-body">
+            <div class="lk-name">ProcessOn</div>
+            <div class="lk-desc">在线画流程图、思维导图，不用装软件。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.ilovepdf.com/zh-cn" target="_blank" rel="noopener">
+          <div class="lk-badge">PDF</div>
+          <div class="lk-body">
+            <div class="lk-name">iLovePDF</div>
+            <div class="lk-desc">PDF 合并、拆分、压缩、转 Word，在线搞定。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://tinypng.com" target="_blank" rel="noopener">
+          <div class="lk-badge">PNG</div>
+          <div class="lk-body">
+            <div class="lk-name">TinyPNG</div>
+            <div class="lk-desc">压缩图片体积，肉眼几乎看不出差别。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.remove.bg/zh" target="_blank" rel="noopener">
+          <div class="lk-badge">抠</div>
+          <div class="lk-body">
+            <div class="lk-name">remove.bg</div>
+            <div class="lk-desc">一键抠掉背景，处理头像和素材很省事。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://excalidraw.com" target="_blank" rel="noopener">
+          <div class="lk-badge">EX</div>
+          <div class="lk-body">
+            <div class="lk-name">Excalidraw</div>
+            <div class="lk-desc">手绘风白板，画架构图比 PPT 快。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.rainymood.com" target="_blank" rel="noopener">
+          <div class="lk-badge">雨</div>
+          <div class="lk-body">
+            <div class="lk-name">Rainy Mood</div>
+            <div class="lk-desc">下雨白噪音，写代码时当背景音。</div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- 二、聊天工具 -->
+    <section class="lk-sec" data-sec>
+      <div class="lk-sec-hd">
+        <h2>聊天工具</h2>
+        <span class="lk-count">12 个</span>
+        <p>QQ、微信这些天天要开的，都放官方下载页，避免下到捆绑包。办公沟通和海外联系的工具也一并收在这里。</p>
+      </div>
+      <div class="lk-grid">
+        <a class="lk-item" href="https://im.qq.com/" target="_blank" rel="noopener">
+          <div class="lk-badge c">QQ</div>
+          <div class="lk-body">
+            <div class="lk-name">QQ <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">腾讯官方下载站，PC、Mac、手机版都在这儿下。传大文件、开群聊、屏幕共享都在客户端里做。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://weixin.qq.com/" target="_blank" rel="noopener">
+          <div class="lk-badge c">微信</div>
+          <div class="lk-body">
+            <div class="lk-name">微信 <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">微信官网，Windows、Mac、安卓、iOS 全平台安装包。电脑版能直接收发文件，比手机传方便。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://tim.qq.com/" target="_blank" rel="noopener">
+          <div class="lk-badge c">TIM</div>
+          <div class="lk-body">
+            <div class="lk-name">TIM <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">QQ 的清爽版，去掉了广告和花哨的会员入口，能登同一个 QQ 号，办公聊天顺手一些。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://work.weixin.qq.com/" target="_blank" rel="noopener">
+          <div class="lk-badge c">企微</div>
+          <div class="lk-body">
+            <div class="lk-name">企微 <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">企业微信，能直接加微信客户、拉群、发朋友圈，公司内部审批和打卡也在这里。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://mp.weixin.qq.com/" target="_blank" rel="noopener">
+          <div class="lk-badge c">公号</div>
+          <div class="lk-body">
+            <div class="lk-name">公众号 <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">微信公众平台，写文章、发推文、看粉丝和阅读数据，做公众号的后台入口。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.dingtalk.com/" target="_blank" rel="noopener">
+          <div class="lk-badge c">钉钉</div>
+          <div class="lk-body">
+            <div class="lk-name">钉钉 <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">阿里系办公沟通工具，打卡、审批、视频会议、群直播一套都有，很多公司在用。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.feishu.cn/" target="_blank" rel="noopener">
+          <div class="lk-badge c">飞书</div>
+          <div class="lk-body">
+            <div class="lk-name">飞书 <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">字节的协作工具，聊天、文档、多维表格、日历打通，写东西和开会比较顺。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://meeting.tencent.com/" target="_blank" rel="noopener">
+          <div class="lk-badge c">会议</div>
+          <div class="lk-body">
+            <div class="lk-name">腾讯会议 <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">开线上会用的，支持共享屏幕和录制，免费版够日常小会。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://discord.com/" target="_blank" rel="noopener">
+          <div class="lk-badge c">DC</div>
+          <div class="lk-body">
+            <div class="lk-name">DC <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">国外游戏和开源社区最常用的语音聊天，很多项目的讨论都在它的服务器里。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://telegram.org/" target="_blank" rel="noopener">
+          <div class="lk-badge c">TG</div>
+          <div class="lk-body">
+            <div class="lk-name">TG <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">主打频道和大群，多端同步，界面干净，需要自备网络环境才能连上。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.whatsapp.com/" target="_blank" rel="noopener">
+          <div class="lk-badge c">WA</div>
+          <div class="lk-body">
+            <div class="lk-name">WA <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">海外联系用得最多的聊天工具，有网页版，和国外客户沟通基本绕不开。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://slack.com/" target="_blank" rel="noopener">
+          <div class="lk-badge c">SL</div>
+          <div class="lk-body">
+            <div class="lk-name">Slack <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">团队频道式沟通，能接各种机器人做通知，外企和远程团队常见。</div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- 三、AI 工具 -->
+    <section class="lk-sec" data-sec>
+      <div class="lk-sec-hd">
+        <h2>AI 工具</h2>
+        <span class="lk-count">24 个</span>
+        <p>按用途排：对话问答、写代码、画图、做视频、配音、查资料。多数有免费额度。</p>
+      </div>
+      <div class="lk-grid">
+
+        <a class="lk-item" href="https://chatgpt.com" target="_blank" rel="noopener">
+          <div class="lk-badge a">GPT</div>
+          <div class="lk-body">
+            <div class="lk-name">ChatGPT <span class="lk-tag free">有免费额度</span></div>
+            <div class="lk-desc">通用对话，写作、翻译、分析数据都能顶一阵。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://claude.ai" target="_blank" rel="noopener">
+          <div class="lk-badge a">C</div>
+          <div class="lk-body">
+            <div class="lk-name">Claude <span class="lk-tag free">有免费额度</span></div>
+            <div class="lk-desc">长文档阅读和代码理解比较扎实，适合丢整份文件进去。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://gemini.google.com" target="_blank" rel="noopener">
+          <div class="lk-badge a">G</div>
+          <div class="lk-body">
+            <div class="lk-name">Gemini</div>
+            <div class="lk-desc">谷歌家的模型，跟搜索和 Workspace 结合得紧。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://chat.deepseek.com" target="_blank" rel="noopener">
+          <div class="lk-badge a">DS</div>
+          <div class="lk-body">
+            <div class="lk-name">DeepSeek <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">中文和数学推理强，国内直连不用折腾网络。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.doubao.com" target="_blank" rel="noopener">
+          <div class="lk-badge a">豆</div>
+          <div class="lk-body">
+            <div class="lk-name">豆包 <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">字节出品，语音通话和图片理解做得顺手。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://kimi.moonshot.cn" target="_blank" rel="noopener">
+          <div class="lk-badge a">K</div>
+          <div class="lk-body">
+            <div class="lk-name">Kimi <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">长文本是强项，几十页 PDF 直接扔进去问。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://tongyi.aliyun.com" target="_blank" rel="noopener">
+          <div class="lk-badge a">通</div>
+          <div class="lk-body">
+            <div class="lk-name">通义千问</div>
+            <div class="lk-desc">阿里系，文档解析和会议记录转写挺实用。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://yiyan.baidu.com" target="_blank" rel="noopener">
+          <div class="lk-badge a">文</div>
+          <div class="lk-body">
+            <div class="lk-name">文心一言</div>
+            <div class="lk-desc">百度的对话产品，中文语料厚。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://chatglm.cn" target="_blank" rel="noopener">
+          <div class="lk-badge a">GLM</div>
+          <div class="lk-body">
+            <div class="lk-name">智谱清言</div>
+            <div class="lk-desc">清华系，支持联网和文档上传，也能自己建智能体。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.perplexity.ai" target="_blank" rel="noopener">
+          <div class="lk-badge a">P</div>
+          <div class="lk-body">
+            <div class="lk-name">Perplexity</div>
+            <div class="lk-desc">带来源的搜索式问答，查资料时比翻十页链接快。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://notebooklm.google.com" target="_blank" rel="noopener">
+          <div class="lk-badge a">NB</div>
+          <div class="lk-body">
+            <div class="lk-name">NotebookLM</div>
+            <div class="lk-desc">把一堆资料变成摘要、问答和音频概览。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://cursor.com" target="_blank" rel="noopener">
+          <div class="lk-badge a">CU</div>
+          <div class="lk-body">
+            <div class="lk-name">Cursor <span class="lk-tag free">有免费额度</span></div>
+            <div class="lk-desc">能改整个项目的编辑器，写前端写脚本都快。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://github.com/features/copilot" target="_blank" rel="noopener">
+          <div class="lk-badge a">CP</div>
+          <div class="lk-body">
+            <div class="lk-name">GitHub Copilot</div>
+            <div class="lk-desc">代码补全老牌选手，学生可以申请免费。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://v0.dev" target="_blank" rel="noopener">
+          <div class="lk-badge a">v0</div>
+          <div class="lk-body">
+            <div class="lk-name">v0</div>
+            <div class="lk-desc">说一句话生成页面组件，拿来搭原型特别快。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://huggingface.co" target="_blank" rel="noopener">
+          <div class="lk-badge a">HF</div>
+          <div class="lk-body">
+            <div class="lk-name">Hugging Face <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">开源模型和数据集的大仓库，很多 Demo 在线能试。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://ollama.com" target="_blank" rel="noopener">
+          <div class="lk-badge a">OL</div>
+          <div class="lk-body">
+            <div class="lk-name">Ollama <span class="lk-tag free">开源</span></div>
+            <div class="lk-desc">在自己电脑上跑模型，一行命令拉下来就能聊。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://lmstudio.ai" target="_blank" rel="noopener">
+          <div class="lk-badge a">LM</div>
+          <div class="lk-body">
+            <div class="lk-name">LM Studio <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">图形界面跑本地模型，不用碰命令行。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://openrouter.ai" target="_blank" rel="noopener">
+          <div class="lk-badge a">OR</div>
+          <div class="lk-body">
+            <div class="lk-name">OpenRouter</div>
+            <div class="lk-desc">一个接口调各家模型，方便横向比效果。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.midjourney.com" target="_blank" rel="noopener">
+          <div class="lk-badge a">MJ</div>
+          <div class="lk-body">
+            <div class="lk-name">Midjourney</div>
+            <div class="lk-desc">出图质感在线，风格化素材首选。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://jimeng.jianying.com" target="_blank" rel="noopener">
+          <div class="lk-badge a">梦</div>
+          <div class="lk-body">
+            <div class="lk-name">即梦 <span class="lk-tag free">有免费额度</span></div>
+            <div class="lk-desc">剪映同门的绘图和视频生成，中文提示词友好。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://klingai.com" target="_blank" rel="noopener">
+          <div class="lk-badge a">KL</div>
+          <div class="lk-body">
+            <div class="lk-name">可灵 AI</div>
+            <div class="lk-desc">文生视频、图生视频，动态效果比较自然。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://runwayml.com" target="_blank" rel="noopener">
+          <div class="lk-badge a">RW</div>
+          <div class="lk-body">
+            <div class="lk-name">Runway</div>
+            <div class="lk-desc">视频生成和后期，做短片实验很方便。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://suno.com" target="_blank" rel="noopener">
+          <div class="lk-badge a">SU</div>
+          <div class="lk-body">
+            <div class="lk-name">Suno <span class="lk-tag free">有免费额度</span></div>
+            <div class="lk-desc">给一段描述生成整首歌，带人声和伴奏。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://elevenlabs.io" target="_blank" rel="noopener">
+          <div class="lk-badge a">EL</div>
+          <div class="lk-body">
+            <div class="lk-name">ElevenLabs</div>
+            <div class="lk-desc">语音合成和克隆，配音接近真人。</div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- 四、编程工具 -->
+    <section class="lk-sec" data-sec>
+      <div class="lk-sec-hd">
+        <h2>编程工具</h2>
+        <span class="lk-count">22 个</span>
+        <p>从写代码的编辑器、重型 IDE，到在网页里直接跑代码的编译器，再到运行环境和嵌入式开发环境。</p>
+      </div>
+      <div class="lk-grid">
+
+        <a class="lk-item" href="https://code.visualstudio.com" target="_blank" rel="noopener">
+          <div class="lk-badge p">VS</div>
+          <div class="lk-body">
+            <div class="lk-name">VS Code <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">微软的轻量编辑器，插件生态最全，前端、Python、嵌入式都能配。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://visualstudio.microsoft.com/zh-hans/" target="_blank" rel="noopener">
+          <div class="lk-badge p">VS</div>
+          <div class="lk-body">
+            <div class="lk-name">Visual Studio <span class="lk-tag free">社区版免费</span></div>
+            <div class="lk-desc">Windows 上的重量级 IDE，C#、C++ 调试器好用，装完占空间大。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.jetbrains.com/zh-cn/" target="_blank" rel="noopener">
+          <div class="lk-badge p">JB</div>
+          <div class="lk-body">
+            <div class="lk-name">JetBrains</div>
+            <div class="lk-desc">IDEA、PyCharm、WebStorm 一套，学生可申请免费授权。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.sublimetext.com" target="_blank" rel="noopener">
+          <div class="lk-badge p">ST</div>
+          <div class="lk-body">
+            <div class="lk-name">Sublime Text</div>
+            <div class="lk-desc">启动快、跟手，打开大文件不卡，可以长期试用。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://neovim.io" target="_blank" rel="noopener">
+          <div class="lk-badge p">NV</div>
+          <div class="lk-body">
+            <div class="lk-name">Neovim <span class="lk-tag free">开源</span></div>
+            <div class="lk-desc">终端里的编辑器，配好插件后改代码不用碰鼠标。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://notepad-plus-plus.org" target="_blank" rel="noopener">
+          <div class="lk-badge p">N++</div>
+          <div class="lk-body">
+            <div class="lk-name">Notepad++ <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">Windows 记事本替代品，改配置、临时看代码够用。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.onlinegdb.com" target="_blank" rel="noopener">
+          <div class="lk-badge p">GDB</div>
+          <div class="lk-body">
+            <div class="lk-name">OnlineGDB <span class="lk-tag free">在线</span></div>
+            <div class="lk-desc">浏览器里写 C / C++ / Python 并单步调试，不用装环境。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://godbolt.org" target="_blank" rel="noopener">
+          <div class="lk-badge p">CE</div>
+          <div class="lk-body">
+            <div class="lk-name">Compiler Explorer <span class="lk-tag free">在线</span></div>
+            <div class="lk-desc">实时看 C++ 代码编译成什么汇编，学优化和 ABI 很好用。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.jdoodle.com" target="_blank" rel="noopener">
+          <div class="lk-badge p">JD</div>
+          <div class="lk-body">
+            <div class="lk-name">JDoodle <span class="lk-tag free">在线</span></div>
+            <div class="lk-desc">支持几十种语言的在线编译器，跑个片段验证语法很快。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://replit.com" target="_blank" rel="noopener">
+          <div class="lk-badge p">RP</div>
+          <div class="lk-body">
+            <div class="lk-name">Replit <span class="lk-tag free">有免费额度</span></div>
+            <div class="lk-desc">在线整套开发环境，能跑服务端，手机浏览器也能写。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://codesandbox.io" target="_blank" rel="noopener">
+          <div class="lk-badge p">CS</div>
+          <div class="lk-body">
+            <div class="lk-name">CodeSandbox <span class="lk-tag free">有免费额度</span></div>
+            <div class="lk-desc">前端项目在线跑，React / Vue 模板开箱可用。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://stackblitz.com" target="_blank" rel="noopener">
+          <div class="lk-badge p">SB</div>
+          <div class="lk-body">
+            <div class="lk-name">StackBlitz <span class="lk-tag free">在线</span></div>
+            <div class="lk-desc">浏览器里跑完整的 Node 项目，装依赖不用等很久。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://codepen.io" target="_blank" rel="noopener">
+          <div class="lk-badge p">CP</div>
+          <div class="lk-body">
+            <div class="lk-name">CodePen <span class="lk-tag free">在线</span></div>
+            <div class="lk-desc">HTML / CSS / JS 三段编辑即时预览，调样式和做动效最顺手。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.python.org" target="_blank" rel="noopener">
+          <div class="lk-badge p">PY</div>
+          <div class="lk-body">
+            <div class="lk-name">Python 官网 <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">解释器官方下载，装的时候记得勾选 Add to PATH。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://nodejs.org" target="_blank" rel="noopener">
+          <div class="lk-badge p">JS</div>
+          <div class="lk-body">
+            <div class="lk-name">Node.js <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">在本地跑 JavaScript，npm 装包都靠它，选 LTS 版稳。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://git-scm.com" target="_blank" rel="noopener">
+          <div class="lk-badge p">GIT</div>
+          <div class="lk-body">
+            <div class="lk-name">Git <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">版本控制命令行本体，上传代码到 GitHub 前先装这个。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://desktop.github.com" target="_blank" rel="noopener">
+          <div class="lk-badge p">GD</div>
+          <div class="lk-body">
+            <div class="lk-name">GitHub Desktop <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">图形化 Git，不想背命令的话用它提交和推送。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.docker.com" target="_blank" rel="noopener">
+          <div class="lk-badge p">DK</div>
+          <div class="lk-body">
+            <div class="lk-name">Docker <span class="lk-tag free">个人免费</span></div>
+            <div class="lk-desc">把运行环境打包成镜像，换台机器不用重配一遍。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.arduino.cc/en/software" target="_blank" rel="noopener">
+          <div class="lk-badge p">AR</div>
+          <div class="lk-body">
+            <div class="lk-name">Arduino IDE <span class="lk-tag free">免费</span></div>
+            <div class="lk-desc">单片机上手第一站，库管理器和串口监视器都内置。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://wokwi.com" target="_blank" rel="noopener">
+          <div class="lk-badge p">WK</div>
+          <div class="lk-body">
+            <div class="lk-name">Wokwi <span class="lk-tag free">在线仿真</span></div>
+            <div class="lk-desc">在线仿真 Arduino / ESP32，接虚拟元件跑代码，不买板子也能试。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://dbeaver.io" target="_blank" rel="noopener">
+          <div class="lk-badge p">DB</div>
+          <div class="lk-body">
+            <div class="lk-name">DBeaver <span class="lk-tag free">开源</span></div>
+            <div class="lk-desc">万能数据库客户端，MySQL、PostgreSQL、SQLite 一个界面连。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.postman.com" target="_blank" rel="noopener">
+          <div class="lk-badge p">PM</div>
+          <div class="lk-body">
+            <div class="lk-name">Postman <span class="lk-tag free">有免费额度</span></div>
+            <div class="lk-desc">调接口、看返回值、存成集合，前后端联调常用。</div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- 五、游戏下载 -->
+    <section class="lk-sec" data-sec>
+      <div class="lk-sec-hd">
+        <h2>游戏下载</h2>
+        <span class="lk-count">18 个</span>
+        <p>只放官方商店和开源项目的入口，没有破解站。第一张卡是加速工具，GitHub 和商店打不开时先开它。Steam、Epic 每逢打折和免费送，蹲一蹲能省不少；懒得装客户端的，可以先试试 MCJS 网页版。</p>
+      </div>
+      <div class="lk-grid">
+
+        <a class="lk-item" href="https://steampp.net/" target="_blank" rel="noopener">
+          <div class="lk-badge g">WT</div>
+          <div class="lk-body">
+            <div class="lk-name">瓦特工具箱 <span class="lk-tag free">免费开源</span></div>
+            <div class="lk-desc">原名 Steam++，本地反向代理加速。勾选 GitHub、Steam 社区、Epic、GOG 后一键加速，打不开商店和下载慢的时候先开它。用前要以管理员身份运行。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://mcjs.link" target="_blank" rel="noopener">
+          <div class="lk-badge g">MC</div>
+          <div class="lk-body">
+            <div class="lk-name">MCJS <span class="lk-tag free">免下载·免费</span></div>
+            <div class="lk-desc">网页版我的世界中文整合站，打开浏览器就能玩，多个版本可选，支持和朋友远程联机。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://store.steampowered.com" target="_blank" rel="noopener">
+          <div class="lk-badge g">S</div>
+          <div class="lk-body">
+            <div class="lk-name">Steam</div>
+            <div class="lk-desc">PC 游戏主战场，夏促冬促折扣大，创意工坊能加模组。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://store.epicgames.com" target="_blank" rel="noopener">
+          <div class="lk-badge g">E</div>
+          <div class="lk-body">
+            <div class="lk-name">Epic 游戏商城 <span class="lk-tag free">每周免费领</span></div>
+            <div class="lk-desc">每周送游戏，领了永久入库，不用一直开着。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.gog.com" target="_blank" rel="noopener">
+          <div class="lk-badge g">G</div>
+          <div class="lk-body">
+            <div class="lk-name">GOG</div>
+            <div class="lk-desc">无 DRM，老游戏修复版多，下载下来离线也能玩。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://itch.io" target="_blank" rel="noopener">
+          <div class="lk-badge g">IT</div>
+          <div class="lk-body">
+            <div class="lk-name">itch.io <span class="lk-tag free">大量免费</span></div>
+            <div class="lk-desc">独立游戏聚集地，很多实验作品免费下载，也能直接网页玩。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.xbox.com/zh-CN/games/store" target="_blank" rel="noopener">
+          <div class="lk-badge g">X</div>
+          <div class="lk-body">
+            <div class="lk-name">Xbox / 微软商店</div>
+            <div class="lk-desc">PC Game Pass 库很大，第一方新作同步上。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://store.playstation.com" target="_blank" rel="noopener">
+          <div class="lk-badge g">PS</div>
+          <div class="lk-body">
+            <div class="lk-name">PlayStation Store</div>
+            <div class="lk-desc">PS 主机数字版，会员每月有免费游戏。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://store.nintendo.com.hk" target="_blank" rel="noopener">
+          <div class="lk-badge g">NS</div>
+          <div class="lk-body">
+            <div class="lk-name">Nintendo eShop</div>
+            <div class="lk-desc">Switch 数字商店，港区支持中文和支付宝。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.wegame.com.cn" target="_blank" rel="noopener">
+          <div class="lk-badge g">W</div>
+          <div class="lk-body">
+            <div class="lk-name">WeGame</div>
+            <div class="lk-desc">腾讯的平台，国产网游和单机国区版在这买。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://play0ad.com" target="_blank" rel="noopener">
+          <div class="lk-badge g">0AD</div>
+          <div class="lk-body">
+            <div class="lk-name">0 A.D. <span class="lk-tag free">免费开源</span></div>
+            <div class="lk-desc">开源即时战略，画质意外地好，支持 Windows / macOS / Linux。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://supertuxkart.net" target="_blank" rel="noopener">
+          <div class="lk-badge g">STK</div>
+          <div class="lk-body">
+            <div class="lk-name">SuperTuxKart <span class="lk-tag free">免费开源</span></div>
+            <div class="lk-desc">卡丁车竞速，配置要求极低，多人分屏能玩一下午。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://wesnoth.org" target="_blank" rel="noopener">
+          <div class="lk-badge g">BoW</div>
+          <div class="lk-body">
+            <div class="lk-name">Battle for Wesnoth <span class="lk-tag free">免费开源</span></div>
+            <div class="lk-desc">回合制战棋，战役多、规则深，一局能耗很久。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://openra.net" target="_blank" rel="noopener">
+          <div class="lk-badge g">RA</div>
+          <div class="lk-body">
+            <div class="lk-name">OpenRA <span class="lk-tag free">免费开源</span></div>
+            <div class="lk-desc">红警重制版，老玩家找手感的地方，能联机。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.wz2100.net" target="_blank" rel="noopener">
+          <div class="lk-badge g">WZ</div>
+          <div class="lk-body">
+            <div class="lk-name">Warzone 2100 <span class="lk-tag free">免费开源</span></div>
+            <div class="lk-desc">3D 即时战略，单位能自己组装，战役挺长。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.luanti.org" target="_blank" rel="noopener">
+          <div class="lk-badge g">LT</div>
+          <div class="lk-body">
+            <div class="lk-name">Luanti（原 Minetest）<span class="lk-tag free">免费开源</span></div>
+            <div class="lk-desc">开源沙盒方块游戏，装模组后玩法很自由。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://ddnet.org" target="_blank" rel="noopener">
+          <div class="lk-badge g">DD</div>
+          <div class="lk-body">
+            <div class="lk-name">DDNet <span class="lk-tag free">免费开源</span></div>
+            <div class="lk-desc">合作跳跃类小游戏，体积小，服务器一直有人。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://www.crazygames.com" target="_blank" rel="noopener">
+          <div class="lk-badge g">CG</div>
+          <div class="lk-body">
+            <div class="lk-name">CrazyGames <span class="lk-tag free">网页直接玩</span></div>
+            <div class="lk-desc">浏览器小游戏站，不用下载，课间十分钟够用。</div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- 六、生活服务 -->
+    <section class="lk-sec" data-sec>
+      <div class="lk-sec-hd">
+        <h2>生活服务</h2>
+        <span class="lk-count">19 个</span>
+        <p>出行、买东西、点外卖、刷视频这些日常要用的，都是官方站点，登录用自己的账号就行。</p>
+      </div>
+      <div class="lk-grid">
+
+        <a class="lk-item" href="https://www.amap.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">高德</div>
+          <div class="lk-body">
+            <div class="lk-name">高德地图</div>
+            <div class="lk-desc">查路线、看实时公交、找附近吃饭的地方，导航语音比车机自带的顺耳。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.12306.cn" target="_blank" rel="noopener">
+          <div class="lk-badge l">12306</div>
+          <div class="lk-body">
+            <div class="lk-name">铁路 12306</div>
+            <div class="lk-desc">买火车票的唯一官方渠道，候补购票比第三方抢票靠谱。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.ctrip.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">携</div>
+          <div class="lk-body">
+            <div class="lk-name">携程</div>
+            <div class="lk-desc">订机票酒店，比价方便，退改规则要看清楚再下单。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.fliggy.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">飞</div>
+          <div class="lk-body">
+            <div class="lk-name">飞猪</div>
+            <div class="lk-desc">阿里系的旅行平台，机票酒店门票一起订，常有套餐。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.goofish.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">闲</div>
+          <div class="lk-body">
+            <div class="lk-name">闲鱼</div>
+            <div class="lk-desc">二手交易，卖闲置、淘旧设备。当面交易记得走平台担保。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.taobao.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">淘</div>
+          <div class="lk-body">
+            <div class="lk-name">淘宝</div>
+            <div class="lk-desc">想买什么基本都能搜到，看销量和评价再决定。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.jd.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">京</div>
+          <div class="lk-body">
+            <div class="lk-name">京东</div>
+            <div class="lk-desc">自营物流快，买数码和日用品省心，售后也直接。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.pinduoduo.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">拼</div>
+          <div class="lk-body">
+            <div class="lk-name">拼多多</div>
+            <div class="lk-desc">百亿补贴买大件划算，小东西便宜，注意看是不是官方店。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.douyin.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">抖</div>
+          <div class="lk-body">
+            <div class="lk-name">抖音</div>
+            <div class="lk-desc">短视频和直播，也有不少教程和测评，网页版能直接刷。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.kuaishou.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">快</div>
+          <div class="lk-body">
+            <div class="lk-name">快手</div>
+            <div class="lk-desc">短视频平台，生活类内容多，直播带货力度大。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.xiaohongshu.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">红</div>
+          <div class="lk-body">
+            <div class="lk-name">小红书</div>
+            <div class="lk-desc">搜攻略和真实测评很管用，吃喝玩乐、装修穿搭都有人写过。网页版能直接刷。</div>
+          </div>
+        </a>
+
+        <a class="lk-item" href="https://weibo.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">微</div>
+          <div class="lk-body">
+            <div class="lk-name">微博</div>
+            <div class="lk-desc">看热点和官方通告最快的地方，评论区得自己筛。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.douban.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">豆</div>
+          <div class="lk-body">
+            <div class="lk-name">豆瓣</div>
+            <div class="lk-desc">查书影音评分和短评，找同类作品挺好用。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.meituan.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">美</div>
+          <div class="lk-body">
+            <div class="lk-name">美团</div>
+            <div class="lk-desc">点外卖、订酒店、买团购券，到店消费前先看看有没有券。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.dianping.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">点</div>
+          <div class="lk-body">
+            <div class="lk-name">大众点评</div>
+            <div class="lk-desc">找店吃饭前看评价和人均，避坑效果好。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.ele.me" target="_blank" rel="noopener">
+          <div class="lk-badge l">饿</div>
+          <div class="lk-body">
+            <div class="lk-name">饿了么</div>
+            <div class="lk-desc">另一个外卖平台，和美团比价，哪边有券点哪边。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.weather.com.cn" target="_blank" rel="noopener">
+          <div class="lk-badge l">天</div>
+          <div class="lk-body">
+            <div class="lk-name">中国天气网</div>
+            <div class="lk-desc">中国气象局官方站点，查台风路径和逐小时预报准。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.cainiao.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">菜</div>
+          <div class="lk-body">
+            <div class="lk-name">菜鸟</div>
+            <div class="lk-desc">查快递进度，多个包裹一起看，不用一个个输单号。</div>
+          </div>
+        </a>
+
+        
+        <a class="lk-item" href="https://www.alipay.com" target="_blank" rel="noopener">
+          <div class="lk-badge l">支</div>
+          <div class="lk-body">
+            <div class="lk-name">支付宝</div>
+            <div class="lk-desc">缴费、转账、查社保公积金，网页版能办不少事。</div>
+          </div>
+        </a>
+
+        </div>
+    </section>
+
+    <!-- 七、软件下载 -->
+    <section class="lk-sec" data-sec id="dl">
+      <div class="lk-sec-hd">
+        <h2>软件下载</h2>
+        <span class="lk-count">40 个</span>
+        <p>常用软件的官方下载入口，按钮点了就能直接下安装包，没有捆绑和下载器。网页版能用的都在上面「常用网站」里，这里只放要装到电脑上的。</p>
+      </div>
+
+      <div class="lk-filter">
+        <button type="button" data-os="all" class="on">全部</button>
+        <button type="button" data-os="win">Windows</button>
+        <button type="button" data-os="mac">macOS</button>
+        <button type="button" data-os="both">双平台</button>
+        <span class="lk-hint">只筛本栏</span>
+      </div>
+
+      <div class="lk-subhd"><h3>浏览器与网络</h3><span class="lk-count">4 个</span></div>
+      <div class="lk-grid">
+
+        <div class="lk-item lk-dl" data-os="win">
+          <div class="lk-badge d">Ch</div>
+          <div class="lk-body">
+            <div class="lk-name">Google Chrome <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows 10/11 · 64 位 · 在线安装包</div>
+            <div class="lk-desc">兼容性最好的浏览器，开发调试工具齐全。装完会自动保持更新。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://dl.google.com/chrome/install/latest/chrome_installer.exe" target="_blank" rel="noopener"><span class="arw">↓</span>直接下载</a>
+              <a class="lk-ghost" href="https://www.google.cn/chrome/" target="_blank" rel="noopener">官网</a>
+            </div>
+            <div class="lk-alt">企业版 MSI 安装包：<a href="https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi" target="_blank" rel="noopener">chrome_x64.msi</a></div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Fx</div>
+          <div class="lk-body">
+            <div class="lk-name">Firefox <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows 64 位 · 简体中文 · 完整安装包</div>
+            <div class="lk-desc">火狐浏览器，非 Chromium 内核，隐私保护更严格。装国内版和国际版都行。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=zh-CN" target="_blank" rel="noopener"><span class="arw">↓</span>直接下载</a>
+              <a class="lk-ghost" href="https://www.mozilla.org/zh-CN/firefox/all/" target="_blank" rel="noopener">官网</a>
+            </div>
+            <div class="lk-alt">长期支持版（ESR）：<a href="https://download.mozilla.org/?product=firefox-esr-latest-ssl&os=win64&lang=zh-CN" target="_blank" rel="noopener">下载 ESR</a></div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Tb</div>
+          <div class="lk-body">
+            <div class="lk-name">Thunderbird <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows / macOS · 开源邮件客户端</div>
+            <div class="lk-desc">Mozilla 出的邮件客户端，一个界面管多个邮箱账号，不用开网页。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.thunderbird.net/zh-CN/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">LS</div>
+          <div class="lk-body">
+            <div class="lk-name">LocalSend <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS / 手机 · 局域网互传</div>
+            <div class="lk-desc">同一个 Wi-Fi 下互传文件，不用数据线、不用微信压缩，速度和原文件一样。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://localsend.org/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lk-subhd"><h3>开发工具</h3><span class="lk-count">13 个</span></div>
+      <div class="lk-grid">
+
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">VS</div>
+          <div class="lk-body">
+            <div class="lk-name">Visual Studio Code <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows 64 位用户版安装包 · 官方最新稳定版</div>
+            <div class="lk-desc">最主流的代码编辑器，插件多、启动快，前端、Python、C 都能配起来。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://update.code.visualstudio.com/latest/win32-x64-user/stable" target="_blank" rel="noopener"><span class="arw">↓</span>直接下载</a>
+              <a class="lk-ghost" href="https://code.visualstudio.com/Download" target="_blank" rel="noopener">官网</a>
+            </div>
+            <div class="lk-alt">其他版本：<a href="https://update.code.visualstudio.com/latest/win32-x64-archive/stable" target="_blank" rel="noopener">Windows 免安装 zip</a> · <a href="https://update.code.visualstudio.com/latest/darwin-arm64/stable" target="_blank" rel="noopener">macOS 版</a></div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="win">
+          <div class="lk-badge d">Git</div>
+          <div class="lk-body">
+            <div class="lk-name">Git for Windows <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows · 含 Git Bash 和图形界面</div>
+            <div class="lk-desc">版本控制本体。要往 GitHub 传代码，先把它装上，装的时候一路默认即可。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://git-scm.com/download/win" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Py</div>
+          <div class="lk-body">
+            <div class="lk-name">Python <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows 64 位 · 版本 3.13.7</div>
+            <div class="lk-desc">官方安装包。<b>安装时记得勾选「Add python.exe to PATH」</b>，否则命令行里找不到 python。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.python.org/ftp/python/3.13.7/python-3.13.7-amd64.exe" target="_blank" rel="noopener"><span class="arw">↓</span>直接下载 3.13.7</a>
+              <a class="lk-ghost" href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener">官网</a>
+            </div>
+            <div class="lk-alt">旧一版：<a href="https://www.python.org/ftp/python/3.12.8/python-3.12.8-amd64.exe" target="_blank" rel="noopener">3.12.8</a>（部分老库只支持到 3.12）</div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Nd</div>
+          <div class="lk-body">
+            <div class="lk-name">Node.js <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows / macOS · 选 LTS 长期支持版</div>
+            <div class="lk-desc">本地跑 JavaScript，npm 装依赖都靠它。建议装 LTS 版，Current 版兼容性容易出问题。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://nodejs.org/zh-cn/download" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Rs</div>
+          <div class="lk-body">
+            <div class="lk-name">Rust <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows 64 位 · rustup 安装器（MSVC）</div>
+            <div class="lk-desc">系统级编程语言，自带包管理 Cargo。MSVC 版需要先装 Visual Studio 生成工具。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe" target="_blank" rel="noopener"><span class="arw">↓</span>直接下载</a>
+              <a class="lk-ghost" href="https://www.rust-lang.org/zh-CN/tools/install" target="_blank" rel="noopener">官网</a>
+            </div>
+            <div class="lk-alt">没装 VS 生成工具？用 <a href="https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-gnu/rustup-init.exe" target="_blank" rel="noopener">GNU 版</a></div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">JDK</div>
+          <div class="lk-body">
+            <div class="lk-name">Eclipse Temurin JDK <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows / macOS · 开源 OpenJDK 发行版</div>
+            <div class="lk-desc">免费可商用的 JDK，替代 Oracle JDK。跑 Minecraft、Android 周边工具都用得上。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://adoptium.net/temurin/releases/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">DB</div>
+          <div class="lk-body">
+            <div class="lk-name">DBeaver <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS · 社区版免费</div>
+            <div class="lk-desc">万能数据库客户端，MySQL、PostgreSQL、SQLite 一个界面全连上，还能看表结构。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://dbeaver.io/download/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Pm</div>
+          <div class="lk-body">
+            <div class="lk-name">Postman <span class="lk-tag free">个人免费</span></div>
+            <div class="lk-sub">Windows / macOS · 桌面版</div>
+            <div class="lk-desc">调接口看返回值，把请求存成集合，前后端联调时省一半沟通成本。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.postman.com/downloads/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Dk</div>
+          <div class="lk-body">
+            <div class="lk-name">Docker Desktop <span class="lk-tag free">个人免费</span></div>
+            <div class="lk-sub">Windows / macOS · 需要开启虚拟化</div>
+            <div class="lk-desc">把运行环境打包成镜像，换台机器不用重新配一遍。Windows 上依赖 WSL2。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Gd</div>
+          <div class="lk-body">
+            <div class="lk-name">Godot <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS · 有免安装版</div>
+            <div class="lk-desc">开源游戏引擎，体积小、不用注册账号，2D 和 3D 都能做，适合自己试着玩。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://godotengine.org/download/windows/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Ard</div>
+          <div class="lk-body">
+            <div class="lk-name">Arduino IDE <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows / macOS · 2.x 版本</div>
+            <div class="lk-desc">单片机入门第一站，库管理器和串口监视器都内置，插上板子就能烧程序。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.arduino.cc/en/software" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Cd</div>
+          <div class="lk-body">
+            <div class="lk-name">VSCodium <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS · VS Code 去遥测版</div>
+            <div class="lk-desc">和 VS Code 同一套代码，但移除了微软的遥测和专有组件，插件库是开放的。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://vscodium.com/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="win">
+          <div class="lk-badge d">PS</div>
+          <div class="lk-body">
+            <div class="lk-name">PowerShell 7 <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows · 微软官方新版命令行</div>
+            <div class="lk-desc">比系统自带的 5.1 强很多，跨平台、支持新语法，写脚本顺手。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://learn.microsoft.com/zh-cn/powershell/scripting/install/installing-powershell-on-windows" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lk-subhd"><h3>系统工具</h3><span class="lk-count">6 个</span></div>
+      <div class="lk-grid">
+
+        <div class="lk-item lk-dl" data-os="win">
+          <div class="lk-badge d">7z</div>
+          <div class="lk-body">
+            <div class="lk-name">7-Zip <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows 64 位 · 版本 24.08</div>
+            <div class="lk-desc">免费开源解压工具，rar、7z、zip 都能开，没有广告弹窗，比某些解压软件干净。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.7-zip.org/a/7z2408-x64.exe" target="_blank" rel="noopener"><span class="arw">↓</span>直接下载</a>
+              <a class="lk-ghost" href="https://www.7-zip.org/download.html" target="_blank" rel="noopener">官网</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="win">
+          <div class="lk-badge d">Ev</div>
+          <div class="lk-body">
+            <div class="lk-name">Everything <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows 64 位 · 版本 1.4.1.1028</div>
+            <div class="lk-desc">本地文件名秒搜，几十万文件也是打完字立刻出结果，比系统搜索快得多。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.voidtools.com/Everything-1.4.1.1028.x64-Setup.exe" target="_blank" rel="noopener"><span class="arw">↓</span>直接下载</a>
+              <a class="lk-ghost" href="https://www.voidtools.com/zh-cn/downloads/" target="_blank" rel="noopener">官网</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="win">
+          <div class="lk-badge d">PT</div>
+          <div class="lk-body">
+            <div class="lk-name">PowerToys <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows 10/11 · 微软官方工具集</div>
+            <div class="lk-desc">窗口分屏布局、批量重命名、颜色吸管、快捷键改造，装一个顶好几个小工具。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://github.com/microsoft/PowerToys/releases/latest" target="_blank" rel="noopener"><span class="arw">↓</span>前往下载页</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="win">
+          <div class="lk-badge d">Rf</div>
+          <div class="lk-body">
+            <div class="lk-name">Rufus <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows · 单文件绿色版</div>
+            <div class="lk-desc">把 ISO 写进 U 盘做启动盘，重装系统、装 Linux 都用它，不用安装直接跑。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://rufus.ie/zh/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="win">
+          <div class="lk-badge d">Sn</div>
+          <div class="lk-body">
+            <div class="lk-name">Snipaste <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows · 截图 + 贴图</div>
+            <div class="lk-desc">截图后能钉在屏幕上对照着看，写代码时对着设计稿改样式很方便，还能取色。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://zh.snipaste.com/download.html" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">WR</div>
+          <div class="lk-body">
+            <div class="lk-name">WinRAR <span class="lk-tag free">可长期试用</span></div>
+            <div class="lk-sub">Windows / macOS · 中文版</div>
+            <div class="lk-desc">老牌解压工具，压缩 rar 格式还得靠它。有简体中文版，按提示装就行。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.win-rar.com/download.html" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lk-subhd"><h3>影音与图像</h3><span class="lk-count">9 个</span></div>
+      <div class="lk-grid">
+
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">VLC</div>
+          <div class="lk-body">
+            <div class="lk-name">VLC <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS · 全平台播放器</div>
+            <div class="lk-desc">几乎什么格式都能放，不用额外装解码器。还能当简易转码和串流工具用。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.videolan.org/vlc/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="win">
+          <div class="lk-badge d">OBS</div>
+          <div class="lk-body">
+            <div class="lk-name">OBS Studio <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows 64 位 · 版本 31.0.0</div>
+            <div class="lk-desc">录屏和直播都用它，免费无水印，能分场景切画面，直播平台推流码直接填。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-31.0.0-Windows-Installer.exe" target="_blank" rel="noopener"><span class="arw">↓</span>直接下载</a>
+              <a class="lk-ghost" href="https://obsproject.com/download" target="_blank" rel="noopener">官网</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Ad</div>
+          <div class="lk-body">
+            <div class="lk-name">Audacity <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS · 免费音频编辑器</div>
+            <div class="lk-desc">录音、剪音频、降噪、变调配音效，比在线工具自由，导出格式也多。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.audacityteam.org/download/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Sc</div>
+          <div class="lk-body">
+            <div class="lk-name">Shotcut <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS · 免费视频剪辑</div>
+            <div class="lk-desc">完全免费的视频剪辑，没有水印和时长限制，多轨道时间线够用。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://shotcut.org/download/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">HB</div>
+          <div class="lk-body">
+            <div class="lk-name">HandBrake <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS · 视频转码</div>
+            <div class="lk-desc">视频压缩和格式转换，有现成预设，压完体积能小一大半画质还稳。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://handbrake.fr/downloads.php" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">GP</div>
+          <div class="lk-body">
+            <div class="lk-name">GIMP <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS · 位图编辑</div>
+            <div class="lk-desc">免费修图和合成软件，功能接近 PS 的核心部分，做素材、改图够用。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.gimp.org/downloads/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Kr</div>
+          <div class="lk-body">
+            <div class="lk-name">Krita <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS · 数字绘画</div>
+            <div class="lk-desc">专门用来画画和插画，笔刷引擎好，支持数位板压感，有中文界面。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://krita.org/zh/download/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Bl</div>
+          <div class="lk-body">
+            <div class="lk-name">Blender <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS · 3D 全套</div>
+            <div class="lk-desc">建模、渲染、动画、剪辑一整套，免安装绿色版也有，学 3D 首选。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.blender.org/download/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">MS</div>
+          <div class="lk-body">
+            <div class="lk-name">MuseScore <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS · 打谱软件</div>
+            <div class="lk-desc">免费的乐谱编辑软件，写谱、播放试听、导出 PDF 和 MIDI 都支持。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://musescore.org/zh-hans/download" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lk-subhd"><h3>办公与效率</h3><span class="lk-count">5 个</span></div>
+      <div class="lk-grid">
+
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">LO</div>
+          <div class="lk-body">
+            <div class="lk-name">LibreOffice <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS · 完整办公套件</div>
+            <div class="lk-desc">免费的办公套件，写文档、做表格、做演示都有，能直接读写 docx 和 xlsx。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://zh-cn.libreoffice.org/download/libreoffice/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">OO</div>
+          <div class="lk-body">
+            <div class="lk-name">ONLYOFFICE <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows / macOS · 桌面编辑器</div>
+            <div class="lk-desc">对 Office 格式兼容做得最像的免费套件之一，打开复杂排版文档不容易错位。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.onlyoffice.com/zh/download-desktop.aspx" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Ob</div>
+          <div class="lk-body">
+            <div class="lk-name">Obsidian <span class="lk-tag free">个人免费</span></div>
+            <div class="lk-sub">Windows / macOS · Markdown 笔记</div>
+            <div class="lk-desc">笔记存成本地 Markdown 文件，文件永远是你的，双向链接串起知识，插件很多。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://obsidian.md/download" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="win">
+          <div class="lk-badge d">SP</div>
+          <div class="lk-body">
+            <div class="lk-name">SumatraPDF <span class="lk-tag free">免费</span></div>
+            <div class="lk-sub">Windows · 单文件轻量阅读器</div>
+            <div class="lk-desc">打开 PDF 飞快，体积只有几 MB，还能看 epub、mobi 和漫画包。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.sumatrapdfreader.org/download-free-pdf-viewer" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">Fg</div>
+          <div class="lk-body">
+            <div class="lk-name">Figma <span class="lk-tag free">有免费额度</span></div>
+            <div class="lk-sub">Windows / macOS · 桌面客户端</div>
+            <div class="lk-desc">界面设计和原型，多人同时改一个文件。桌面版比网页版稳定，也能离线看稿。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.figma.com/downloads/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lk-subhd"><h3>安全与隐私</h3><span class="lk-count">3 个</span></div>
+      <div class="lk-grid">
+
+        <div class="lk-item lk-dl" data-os="win">
+          <div class="lk-badge d">KP</div>
+          <div class="lk-body">
+            <div class="lk-name">KeePass <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows · 本地密码库</div>
+            <div class="lk-desc">密码存在本地加密文件里，不上传云端。只有记住一个主密码，其余全交给它。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://keepass.info/download.html" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">VC</div>
+          <div class="lk-body">
+            <div class="lk-name">VeraCrypt <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS · 磁盘加密</div>
+            <div class="lk-desc">创建加密容器或加密整个分区，放敏感文件用，基于 TrueCrypt 继续维护。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://www.veracrypt.fr/en/Downloads.html" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-item lk-dl" data-os="both">
+          <div class="lk-badge d">BW</div>
+          <div class="lk-body">
+            <div class="lk-name">Bitwarden <span class="lk-tag free">开源</span></div>
+            <div class="lk-sub">Windows / macOS / 浏览器插件</div>
+            <div class="lk-desc">开源密码管理器，能在电脑和手机之间同步，免费版功能就够日常用。</div>
+            <div class="lk-acts">
+              <a class="lk-btn" href="https://bitwarden.com/download/" target="_blank" rel="noopener"><span class="arw">↓</span>前往官网下载</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 说明 -->
+    <section class="card">
+      <h2>关于这一页</h2>
+      <p class="lk-note">
+        链接都是各家的官方入口，点开直达，不经过中转页。搜索结果里的第三方「高速下载器」尽量别装，
+        捆绑软件大多是从那儿来的。游戏部分只列正版渠道和开源项目，不提供破解资源。
+      </p>
+      <p style="margin-top:14px;font-size:14px;color:var(--text-soft);">
+        网站改版或换域名时地址可能会变，如果某个链接打不开，换个关键词搜官方名一般都能找到。
+      </p>
+    </section>
+
+  </div>
+
+  <!-- 页脚 -->
+  <footer>
+    © 2026 二次可能 · 保留所有权利 &nbsp;|&nbsp; 用 HTML + CSS + JavaScript 手写
+    <div style="margin-top:8px;font-size:12px;">
+      <a href="index.html">首页</a> ·
+      <a href="about.html">关于我</a> ·
+      <a href="works.html">作品</a> ·
+      <a href="tools.html">实用小工具</a> ·
+      <a href="wed.html">链接导航</a> ·
+      <a href="wed.html#dl">软件下载</a> ·
+      <a href="contact.html">联系我</a>
+    </div>
+  </footer>
+
+<script defer src="js/site.js"></script>
+<script>
+(function(){
+  var input = document.getElementById('lkSearch');
+  var clear = document.getElementById('lkClear');
+  var empty = document.getElementById('lkEmpty');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.lk-filter button'));
+  if(!input) return;
+
+  var items = Array.prototype.slice.call(document.querySelectorAll('.lk-item'));
+  var secs  = Array.prototype.slice.call(document.querySelectorAll('[data-sec]'));
+  var subhd = Array.prototype.slice.call(document.querySelectorAll('.lk-subhd'));
+  var os = 'all';
+
+  items.forEach(function(el){
+    el.setAttribute('data-key', (el.textContent || '').toLowerCase().replace(/\s+/g,' '));
+  });
+
+  function osOk(el){
+    if(os === 'all') return true;
+    var o = el.getAttribute('data-os');
+    if(!o) return true;              // 普通链接不受平台筛选影响
+    return o === os || o === 'both'; // 双平台的两种都能选到
+  }
+
+  function apply(){
+    var q = (input.value || '').trim().toLowerCase();
+    var hit = 0;
+    items.forEach(function(el){
+      var okQ = !q || el.getAttribute('data-key').indexOf(q) > -1;
+      var ok = okQ && osOk(el);
+      el.style.display = ok ? '' : 'none';
+      if(ok) hit++;
+    });
+    // 分类小标题跟着藏
+    subhd.forEach(function(hd){
+      var grid = hd.nextElementSibling;
+      var any = grid ? grid.querySelectorAll('.lk-dl:not([style*="display: none"])').length : 0;
+      hd.style.display = any ? '' : 'none';
+    });
+    // 整段没结果就藏起来
+    secs.forEach(function(sec){
+      var any = sec.querySelectorAll('.lk-item:not([style*="display: none"])').length;
+      sec.style.display = any ? '' : 'none';
+    });
+    empty.classList.toggle('show', hit === 0);
+  }
+
+  input.addEventListener('input', apply);
+  clear.addEventListener('click', function(){
+    input.value = '';
+    os = 'all';
+    chips.forEach(function(c){ c.classList.toggle('on', c.getAttribute('data-os') === 'all'); });
+    apply();
+    input.focus();
+  });
+  input.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ input.value=''; apply(); }
+  });
+  chips.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      os = btn.getAttribute('data-os');
+      chips.forEach(function(c){ c.classList.toggle('on', c === btn); });
+      apply();
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="二次可能的 B 站作品：七步将杀、Scratch 翻译、开源硬件创意智造、TurboWarp 等投稿，页面内可直接播放，并会自动检查有没有新视频。">
+<title>二次可能 · 作品</title>
+<link rel="icon" href="photo/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="photo/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="photo/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="photo/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 顶部导航栏 -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html"><span class="logo-dot"></span>二次可能</a>
+      <button class="burger" id="burger" aria-label="菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于我</a></li>
+        <li><a href="works.html" class="active">作品</a></li>
+        <li><a href="tools.html">实用小工具</a></li>
+        <li><a href="wed.html">链接导航</a></li>
+        <li><a href="wed.html#dl">软件下载</a></li>
+        <li><a href="contact.html">联系我</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 头部 -->
+  <header class="hero">
+    <h1>作品</h1>
+    <p class="tagline">B 站投稿的嵌入播放器，点卡片就能切换，还会自动帮我盯着有没有新视频 🎬</p>
+  </header>
+
+  <div class="wrap">
+
+    <!-- 播放器 + 作品卡片 -->
+    <section class="card">
+      <h2>作品展示</h2>
+      <p>下面是 B 站的嵌入式外链播放器，点卡片换视频，不用跳走。</p>
+
+      <div class="player-wrap" id="playerWrap">
+        <iframe id="biliPlayer"
+                src="https://player.bilibili.com/player.html?bvid=BV1Y3Ji6gEtY&amp;page=1&amp;high_quality=1&amp;danmaku=0&amp;autoplay=0"
+                allowfullscreen="true"
+                scrolling="no"
+                frameborder="no"
+                framespacing="0"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                title="哔哩哔哩播放器"></iframe>
+        <div class="player-loading" id="playerLoading"><span class="spinner"></span>正在加载视频…</div>
+        <button class="player-refresh" id="playerRefresh" title="重新加载播放器" aria-label="重新加载播放器">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V2L8 6l4 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg>
+        </button>
+      </div>
+
+      <p class="player-now"><span class="live-dot"></span>正在播放：<b id="playerTitle">正在读取…</b></p>
+
+      <!-- 卡片由 js/works.js 按数据生成 -->
+      <div class="works-bar">
+        <span class="works-status" id="worksStatus">正在读取本地作品数据…</span>
+        <button class="btn-check" id="checkUpdate" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V2L8 6l4 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg>
+          检查新视频
+        </button>
+      </div>
+
+      <div class="works-grid" id="worksGrid"></div>
+    </section>
+
+    <!-- 说明 -->
+    <section class="card">
+      <h2>关于这些作品</h2>
+      <p>这些视频大部分是「边做边记」的产物：把折腾的过程录下来，剪一剪发出去，过一阵回头看还能想起当时卡在哪儿。</p>
+      <p>页面打开时会自动检查一次有没有新投稿，也可以随时点「检查新视频」手动再查，新的会标上 <b>NEW</b>。</p>
+      <p>如果播放器加载不出来，通常和网络或 B 站的外链限制有关，可以直接点「查看全部投稿」去 B 站看。</p>
+    </section>
+
+  </div>
+
+  <!-- 页脚 -->
+  <footer>
+    © 2026 二次可能 · 保留所有权利 &nbsp;|&nbsp; 用 HTML + CSS + JavaScript 手写
+    <div style="margin-top:8px;font-size:12px;">
+      <a href="index.html">首页</a> ·
+      <a href="about.html">关于我</a> ·
+      <a href="works.html">作品</a> ·
+      <a href="tools.html">实用小工具</a> ·
+      <a href="contact.html">联系我</a>
+    </div>
+  </footer>
+
+<script defer src="js/videos-data.js"></script>
+<script defer src="js/works.js"></script>
+<script defer src="js/eat-fish-together.js"></script>
+<script defer src="js/site.js"></script>
+</body>
+</html>

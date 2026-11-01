@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="在线 Base64 编码解码，支持中文与文件转码。纯前端处理，内容不外传。">
+<title>Base64 编码解码 · 二次可能</title>
+<link rel="icon" href="photo/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="photo/favicon-32.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html"><span class="logo-dot"></span>二次可能</a>
+      <button class="burger" id="burger" aria-label="菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于我</a></li>
+        <li><a href="works.html">作品</a></li>
+        <li><a href="tools.html" class="active">实用小工具</a></li>
+        <li><a href="wed.html">链接导航</a></li>
+        <li><a href="wed.html#dl">软件下载</a></li>
+        <li><a href="contact.html">联系我</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page-head">
+    <h1>Base64 编码解码</h1>
+    <p>中文不会变乱码，粘进来的内容也不用担心被上传——全在本地算。</p>
+  </header>
+
+  <div class="tool-main">
+
+    <section class="tool-panel">
+      <div class="tool-grid2">
+        <div>
+          <label class="fl" for="plain">原文（UTF-8）</label>
+          <textarea id="plain" class="ta" spellcheck="false" placeholder="输入文字，比如：你好，二次可能"></textarea>
+        </div>
+        <div>
+          <label class="fl" for="b64">Base64</label>
+          <textarea id="b64" class="ta" spellcheck="false" placeholder="或把 Base64 粘到这里，点「解码 ↑」"></textarea>
+        </div>
+      </div>
+
+      <div class="bar">
+        <button class="tb" data-act="enc">编码 ↓</button>
+        <button class="tb" data-act="dec">解码 ↑</button>
+        <button class="tb ghost" data-act="copyPlain">复制原文</button>
+        <button class="tb ghost" data-act="copyB64">复制 Base64</button>
+        <button class="tb ghost" data-act="sample">填个示例</button>
+        <button class="tb ghost" data-act="clear">清空</button>
+      </div>
+
+      <div class="opts">
+        <label><input type="checkbox" id="urlSafe"> URL 安全（+ → -，/ → _，去掉 =）</label>
+        <label><input type="checkbox" id="noWrap" checked> 输出不换行</label>
+        <label><input type="checkbox" id="live" checked> 输入时自动编码</label>
+      </div>
+
+      <div class="msg" id="msg"></div>
+      <p class="hint" id="stat">等待输入…</p>
+    </section>
+
+    <section class="tool-panel">
+      <h2>文件转 Base64</h2>
+      <p class="hint">选一个文件，直接得到它的 Base64，图片还能连 <code>data:</code> 前缀一起拿走。文件不会离开你的电脑。</p>
+      <div class="bar">
+        <input type="file" id="file" class="file-inp">
+        <label class="chk"><input type="checkbox" id="asDataUrl"> 带 data: 前缀</label>
+      </div>
+      <div class="msg" id="fmsg"></div>
+      <p class="hint" id="fstat"></p>
+      <textarea id="fout" class="ta ta-s" spellcheck="false" readonly placeholder="选好文件后，结果出现在这里"></textarea>
+      <div class="bar">
+        <button class="tb ghost" data-act="copyFile">复制结果</button>
+        <button class="tb ghost" data-act="clearFile">清空</button>
+      </div>
+    </section>
+
+    <section class="tool-panel">
+      <h2>几个说明</h2>
+      <p class="hint">
+        Base64 是把 3 个字节变成 4 个字符，所以体积会大约变成原来的 4/3，不是加密，任何人都能解回来。<br>
+        中文按 UTF-8 编码后再转 Base64，所以同一个词在别的编码下算出来的结果会不一样，这是正常的。<br>
+        如果解码时报错，多半是原文里混了换行以外的非法字符，或者内容本来就不是 Base64。
+      </p>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2026 二次可能 · 保留所有权利 &nbsp;|&nbsp; 用 HTML + CSS + JavaScript 手写
+    <div style="margin-top:8px;font-size:12px;">
+      <a href="index.html">首页</a> ·
+      <a href="about.html">关于我</a> ·
+      <a href="works.html">作品</a> ·
+      <a href="tools.html">实用小工具</a> ·
+      <a href="contact.html">联系我</a>
+    </div>
+  </footer>
+
+<script defer src="js/site.js"></script>
+<script>
+(function () {
+  'use strict';
+  var plain = document.getElementById('plain');
+  var b64 = document.getElementById('b64');
+  var msg = document.getElementById('msg');
+  var stat = document.getElementById('stat');
+  var optUrl = document.getElementById('urlSafe');
+  var optWrap = document.getElementById('noWrap');
+  var optLive = document.getElementById('live');
+
+  function show(el, kind, text) {
+    el.className = 'msg show ' + kind;
+    el.textContent = text;
+  }
+  function hide(el) { el.className = 'msg'; el.textContent = ''; }
+
+  function bytesToBin(bytes) {
+    var s = '';
+    for (var i = 0; i < bytes.length; i += 0x8000) {
+      s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    }
+    return s;
+  }
+
+  function encode(str) {
+    var bytes = new TextEncoder().encode(str);
+    var out = btoa(bytesToBin(bytes));
+    if (optUrl.checked) out = out.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    if (!optWrap.checked) out = out.replace(/(.{76})/g, '$1\n');
+    return { text: out, len: bytes.length };
+  }
+
+  function decode(str) {
+    var s = str.replace(/\s+/g, '');
+    // 还原 URL 安全字符
+    s = s.replace(/-/g, '+').replace(/_/g, '/');
+    while (s.length % 4) s += '=';
+    var bin = atob(s);
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    var text = null;
+    try {
+      text = new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+    } catch (e) {
+      text = null;
+    }
+    return { text: text, bytes: bytes };
+  }
+
+  function doEncode() {
+    var s = plain.value;
+    if (!s) { b64.value = ''; hide(msg); stat.textContent = '等待输入…'; return; }
+    var r = encode(s);
+    b64.value = r.text;
+    hide(msg);
+    stat.textContent = '原文 ' + r.len + ' 字节 → Base64 ' + r.text.replace(/\s/g, '').length + ' 字符' +
+      '（约 ' + Math.round(r.text.replace(/\s/g, '').length / r.len * 100) + '%）';
+  }
+
+  function doDecode() {
+    var s = b64.value.trim();
+    if (!s) { show(msg, 'warn', 'Base64 那一栏还是空的'); return; }
+    var r;
+    try {
+      r = decode(s);
+    } catch (e) {
+      show(msg, 'err', '这不是合法的 Base64：' + (e && e.message ? e.message : '请检查字符'));
+      return;
+    }
+    if (r.text === null) {
+      plain.value = '';
+      var hex = [];
+      for (var i = 0; i < Math.min(16, r.bytes.length); i++) {
+        hex.push(('0' + r.bytes[i].toString(16)).slice(-2));
+      }
+      show(msg, 'warn', '解码成功，但内容不是有效的 UTF-8 文本（可能是二进制，共 ' +
+        r.bytes.length + ' 字节，开头：' + hex.join(' ') + '…）');
+      stat.textContent = '共 ' + r.bytes.length + ' 字节';
+      return;
+    }
+    plain.value = r.text;
+    hide(msg);
+    stat.textContent = '解出 ' + r.text.length + ' 个字符，共 ' + r.bytes.length + ' 字节';
+  }
+
+  function copyText(text, okMsg) {
+    if (!text) { show(msg, 'warn', '还没有可以复制的内容'); return; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        show(msg, 'ok', okMsg);
+      }, function () {
+        show(msg, 'err', '复制失败，请手动选中复制');
+      });
+    } else {
+      show(msg, 'warn', '当前浏览器不支持自动复制，请手动选中');
+    }
+  }
+
+  var acts = {
+    enc: doEncode,
+    dec: doDecode,
+    copyPlain: function () { copyText(plain.value, '原文已复制'); },
+    copyB64: function () { copyText(b64.value, 'Base64 已复制'); },
+    sample: function () {
+      plain.value = '你好，二次可能';
+      doEncode();
+      show(msg, 'ok', '这是「你好，二次可能」的 Base64，改改看');
+    },
+    clear: function () {
+      plain.value = ''; b64.value = '';
+      hide(msg); stat.textContent = '已清空';
+    }
+  };
+
+  document.querySelector('.tool-panel .bar').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-act]');
+    if (b && acts[b.getAttribute('data-act')]) acts[b.getAttribute('data-act')]();
+  });
+
+  plain.addEventListener('input', function () {
+    if (!optLive.checked) return;
+    var pos = b64.selectionStart;
+    doEncode();
+    b64.selectionStart = b64.selectionEnd = pos;
+  });
+
+  b64.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      doDecode();
+    }
+  });
+
+  [optUrl, optWrap].forEach(function (el) {
+    el.addEventListener('change', function () {
+      if (plain.value) doEncode();
+    });
+  });
+
+  // ---------------- 文件转 Base64 ----------------
+  var fileInp = document.getElementById('file');
+  var fout = document.getElementById('fout');
+  var fmsg = document.getElementById('fmsg');
+  var fstat = document.getElementById('fstat');
+  var asData = document.getElementById('asDataUrl');
+
+  function fmtSize(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1024 * 1024) return (n / 1024).toFixed(1) + ' KB';
+    return (n / 1024 / 1024).toFixed(2) + ' MB';
+  }
+
+  function convertFile(file) {
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      var bytes = new Uint8Array(reader.result);
+      var out = btoa(bytesToBin(bytes));
+      var body = optWrap.checked ? out : out.replace(/(.{76})/g, '$1\n');
+      fout.value = asData.checked
+        ? 'data:' + (file.type || 'application/octet-stream') + ';base64,' + out
+        : body;
+      hide(fmsg);
+      fstat.textContent = file.name + ' · ' + fmtSize(file.size) + ' · ' +
+        (file.type || '未知类型') + ' → Base64 ' + fmtSize(fout.value.length);
+    };
+    reader.onerror = function () { show(fmsg, 'err', '读取文件失败，请重试'); };
+    reader.readAsArrayBuffer(file);
+  }
+
+  fileInp.addEventListener('change', function () {
+    convertFile(fileInp.files && fileInp.files[0]);
+  });
+  asData.addEventListener('change', function () {
+    if (fileInp.files && fileInp.files[0]) convertFile(fileInp.files[0]);
+  });
+
+  document.querySelectorAll('.tool-panel')[1].addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-act]');
+    if (!b) return;
+    var a = b.getAttribute('data-act');
+    if (a === 'copyFile') copyText(fout.value, '文件 Base64 已复制');
+    if (a === 'clearFile') {
+      fout.value = ''; fstat.textContent = '';
+      hide(fmsg);
+      try { fileInp.value = ''; } catch (err) {}
+    }
+  });
+})();
+</script>
+</body>
+</html>

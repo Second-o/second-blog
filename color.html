@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="颜色取色与色值转换：HEX、RGB、HSL 互转，带透明度、对比度和常用色板。">
+<title>颜色取色与色值转换 · 二次可能</title>
+<link rel="icon" href="photo/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="photo/favicon-32.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html"><span class="logo-dot"></span>二次可能</a>
+      <button class="burger" id="burger" aria-label="菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于我</a></li>
+        <li><a href="works.html">作品</a></li>
+        <li><a href="tools.html" class="active">实用小工具</a></li>
+        <li><a href="wed.html">链接导航</a></li>
+        <li><a href="wed.html#dl">软件下载</a></li>
+        <li><a href="contact.html">联系我</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page-head">
+    <h1>颜色取色与色值转换</h1>
+    <p>HEX、RGB、HSL 随便改哪一栏，其余跟着变；顺手算一下白字黑字谁更清楚。</p>
+  </header>
+
+  <div class="tool-main">
+
+    <section class="tool-panel">
+      <div class="color-top">
+        <div class="color-swatch" id="swatch" title="点一下用系统取色器">
+          <span id="swatchLabel">#E8973A</span>
+        </div>
+        <div class="color-fields">
+          <label class="fl" for="fHex">HEX</label>
+          <input id="fHex" class="inp mono" spellcheck="false" autocomplete="off" value="#E8973A">
+
+          <label class="fl" for="fRgb">RGB</label>
+          <input id="fRgb" class="inp mono" spellcheck="false" autocomplete="off" value="rgb(232, 151, 58)">
+
+          <label class="fl" for="fHsl">HSL</label>
+          <input id="fHsl" class="inp mono" spellcheck="false" autocomplete="off" value="hsl(32, 79%, 57%)">
+
+          <label class="fl" for="fAlpha">不透明度 <b id="alphaVal">100%</b></label>
+          <input type="range" id="fAlpha" class="range" min="0" max="100" value="100">
+
+          <div class="bar" style="margin-top:12px">
+            <input type="color" id="picker" class="picker" value="#e8973a" title="系统取色器">
+            <button class="tb ghost" data-act="copyHex">复制 HEX</button>
+            <button class="tb ghost" data-act="reset">还原</button>
+          </div>
+        </div>
+      </div>
+      <div class="msg" id="msg"></div>
+      <p class="hint" id="stat">支持 hex、rgb()、hsl() 和颜色名，改完回车或直接失焦就生效。</p>
+    </section>
+
+    <section class="tool-panel">
+      <h2>各种写法</h2>
+      <div class="val-list" id="vals"></div>
+    </section>
+
+    <section class="tool-panel">
+      <h2>文字放在这个底色上</h2>
+      <div class="contrast-grid">
+        <div class="contrast-box" id="boxWhite">白色文字<br><span id="cw">—</span></div>
+        <div class="contrast-box" id="boxBlack">黑色文字<br><span id="cb">—</span></div>
+      </div>
+      <p class="hint">对比度按 WCAG 计算：正文建议 4.5:1 以上，大号字 3:1 以上。</p>
+    </section>
+
+    <section class="tool-panel">
+      <h2>常用色</h2>
+      <div class="palette" id="palette"></div>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2026 二次可能 · 保留所有权利 &nbsp;|&nbsp; 用 HTML + CSS + JavaScript 手写
+    <div style="margin-top:8px;font-size:12px;">
+      <a href="index.html">首页</a> ·
+      <a href="about.html">关于我</a> ·
+      <a href="works.html">作品</a> ·
+      <a href="tools.html">实用小工具</a> ·
+      <a href="contact.html">联系我</a>
+    </div>
+  </footer>
+
+<script defer src="js/site.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var fHex = document.getElementById('fHex');
+  var fRgb = document.getElementById('fRgb');
+  var fHsl = document.getElementById('fHsl');
+  var fAlpha = document.getElementById('fAlpha');
+  var alphaVal = document.getElementById('alphaVal');
+  var picker = document.getElementById('picker');
+  var swatch = document.getElementById('swatch');
+  var swatchLabel = document.getElementById('swatchLabel');
+  var vals = document.getElementById('vals');
+  var msg = document.getElementById('msg');
+  var stat = document.getElementById('stat');
+
+  var cur = { r: 232, g: 151, b: 58, a: 1 };
+
+  // ---------- 数学 ----------
+  function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
+
+  function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h = 0, s = 0, l = (max + min) / 2;
+    var d = max - min;
+    if (d !== 0) {
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      if (max === r) h = ((g - b) / d + (g < b ? 6 : 0));
+      else if (max === g) h = (b - r) / d + 2;
+      else h = (r - g) / d + 4;
+      h *= 60;
+    }
+    return { h: Math.round(h), s: Math.round(s * 100), l: Math.round(l * 100) };
+  }
+
+  function hslToRgb(h, s, l) {
+    h = ((h % 360) + 360) % 360;
+    s = clamp(s, 0, 100) / 100;
+    l = clamp(l, 0, 100) / 100;
+    var c = (1 - Math.abs(2 * l - 1)) * s;
+    var x = c * (1 - Math.abs((h / 60) % 2 - 1));
+    var m = l - c / 2;
+    var r = 0, g = 0, b = 0;
+    if (h < 60) { r = c; g = x; }
+    else if (h < 120) { r = x; g = c; }
+    else if (h < 180) { g = c; b = x; }
+    else if (h < 240) { g = x; b = c; }
+    else if (h < 300) { r = x; b = c; }
+    else { r = c; b = x; }
+    return {
+      r: Math.round((r + m) * 255),
+      g: Math.round((g + m) * 255),
+      b: Math.round((b + m) * 255)
+    };
+  }
+
+  function toHex2(n) { return ('0' + clamp(Math.round(n), 0, 255).toString(16)).slice(-2); }
+
+  function hexStr(c) { return '#' + toHex2(c.r) + toHex2(c.g) + toHex2(c.b); }
+
+  function hslStr(c) {
+    var h = rgbToHsl(c.r, c.g, c.b);
+    return 'hsl(' + h.h + ', ' + h.s + '%, ' + h.l + '%)';
+  }
+
+  // ---------- 解析：先用 canvas 兜底（支持颜色名等） ----------
+  var cv = document.createElement('canvas');
+  cv.width = cv.height = 1;
+  var ctx = cv.getContext('2d');
+
+  function parseByCanvas(str) {
+    if (!str) return null;
+    ctx.fillStyle = '#000000';
+    ctx.fillStyle = String(str).trim();
+    var a = ctx.fillStyle;
+    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = String(str).trim();
+    var b = ctx.fillStyle;
+    if (a !== b) return null; // 两次不同 → 非法颜色
+    var m = /^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+)\s*)?\)$/i.exec(a);
+    if (m) {
+      return {
+        r: clamp(Math.round(+m[1]), 0, 255),
+        g: clamp(Math.round(+m[2]), 0, 255),
+        b: clamp(Math.round(+m[3]), 0, 255),
+        a: m[4] === undefined ? 1 : clamp(parseFloat(m[4]), 0, 1)
+      };
+    }
+    m = /^#([0-9a-f]{6})$/i.exec(a);
+    if (m) {
+      return {
+        r: parseInt(m[1].slice(0, 2), 16),
+        g: parseInt(m[1].slice(2, 4), 16),
+        b: parseInt(m[1].slice(4, 6), 16),
+        a: 1
+      };
+    }
+    return null;
+  }
+
+  function parseHex(str) {
+    var s = String(str || '').trim().replace(/^#/, '');
+    if (!/^[0-9a-fA-F]+$/.test(s)) return null;
+    if (s.length === 3 || s.length === 4) {
+      s = s.split('').map(function (ch) { return ch + ch; }).join('');
+    }
+    if (s.length !== 6 && s.length !== 8) return null;
+    return {
+      r: parseInt(s.slice(0, 2), 16),
+      g: parseInt(s.slice(2, 4), 16),
+      b: parseInt(s.slice(4, 6), 16),
+      a: s.length === 8 ? parseInt(s.slice(6, 8), 16) / 255 : 1
+    };
+  }
+
+  function parseRgbField(str) {
+    var s = String(str || '').trim();
+    var m = /^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+)\s*)?\)$/i.exec(s);
+    if (!m) m = /^([\d.]+)\s*[,\s]\s*([\d.]+)\s*[,\s]\s*([\d.]+)$/.exec(s);
+    if (!m) return null;
+    return {
+      r: clamp(Math.round(+m[1]), 0, 255),
+      g: clamp(Math.round(+m[2]), 0, 255),
+      b: clamp(Math.round(+m[3]), 0, 255),
+      a: m[4] === undefined ? null : clamp(parseFloat(m[4]), 0, 1)
+    };
+  }
+
+  function parseHslField(str) {
+    var s = String(str || '').trim();
+    var m = /^hsla?\(\s*(-?[\d.]+)(?:deg)?\s*,?\s*([\d.]+)%\s*,?\s*([\d.]+)%\s*(?:,\s*([\d.]+)\s*)?\)$/i.exec(s);
+    if (!m) m = /^(-?[\d.]+)\s*[,\s]\s*([\d.]+)%?\s*[,\s]\s*([\d.]+)%?$/.exec(s);
+    if (!m) return null;
+    var rgb = hslToRgb(parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3]));
+    rgb.a = m[4] === undefined ? null : clamp(parseFloat(m[4]), 0, 1);
+    return rgb;
+  }
+
+  function parseAny(str) {
+    var s = String(str || '').trim();
+    if (!s) return null;
+    if (/^#?[0-9a-fA-F]{3,8}$/.test(s)) {
+      var byHex = parseHex(s);
+      if (byHex) return byHex;
+    }
+    if (/^rgba?/i.test(s) || /^[\d.]+\s*[,\s]\s*[\d.]+\s*[,\s]\s*[\d.]+$/.test(s)) {
+      var byRgb = parseRgbField(s);
+      if (byRgb) return byRgb;
+    }
+    if (/^hsla?/i.test(s) || /%/.test(s)) {
+      var byHsl = parseHslField(s);
+      if (byHsl) return byHsl;
+    }
+    return parseByCanvas(s);
+  }
+
+  // ---------- 渲染 ----------
+  function showMsg(kind, text) {
+    msg.className = 'msg show ' + kind;
+    msg.textContent = text;
+  }
+  function hideMsg() { msg.className = 'msg'; msg.textContent = ''; }
+
+  function lum(c) {
+    var f = function (v) {
+      v /= 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    };
+    return 0.2126 * f(c.r) + 0.7152 * f(c.g) + 0.0722 * f(c.b);
+  }
+
+  function contrast(a, b) {
+    var l1 = lum(a), l2 = lum(b);
+    var hi = Math.max(l1, l2), lo = Math.min(l1, l2);
+    return (hi + 0.05) / (lo + 0.05);
+  }
+
+  var FORMATS = [
+    ['HEX', function (c) { return hexStr(c); }],
+    ['HEX（8 位带透明）', function (c) {
+      return hexStr(c) + toHex2(c.a * 255);
+    }],
+    ['RGB', function (c) { return 'rgb(' + c.r + ', ' + c.g + ', ' + c.b + ')'; }],
+    ['RGBA', function (c) {
+      return 'rgba(' + c.r + ', ' + c.g + ', ' + c.b + ', ' + (+c.a.toFixed(2)) + ')';
+    }],
+    ['HSL', function (c) { return hslStr(c); }],
+    ['HSLA', function (c) {
+      var h = rgbToHsl(c.r, c.g, c.b);
+      return 'hsla(' + h.h + ', ' + h.s + '%, ' + h.l + '%, ' + (+c.a.toFixed(2)) + ')';
+    }],
+    ['CSS 变量', function (c) {
+      return '--color: ' + hexStr(c) + ';';
+    }]
+  ];
+
+  function renderVals() {
+    vals.innerHTML = '';
+    FORMATS.forEach(function (f) {
+      var code = f[1](cur);
+      var row = document.createElement('div');
+      row.className = 'val-row';
+      var lab = document.createElement('span');
+      lab.className = 'val-label';
+      lab.textContent = f[0];
+      var val = document.createElement('code');
+      val.className = 'val-code';
+      val.textContent = code;
+      var btn = document.createElement('button');
+      btn.className = 'tb ghost tiny';
+      btn.textContent = '复制';
+      btn.addEventListener('click', function () { copy(code, btn); });
+      row.appendChild(lab);
+      row.appendChild(val);
+      row.appendChild(btn);
+      vals.appendChild(row);
+    });
+  }
+
+  function copy(text, btn) {
+    var done = function (ok) {
+      if (ok) {
+        showMsg('ok', '已复制：' + text);
+        if (btn) {
+          var old = btn.textContent;
+          btn.textContent = '已复制 ✓';
+          setTimeout(function () { btn.textContent = old; }, 1100);
+        }
+      } else {
+        showMsg('err', '复制失败，请手动选中复制');
+      }
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+    } else {
+      done(false);
+    }
+  }
+
+  function renderAll(skipField) {
+    var hex = hexStr(cur);
+    swatch.style.background = 'rgba(' + cur.r + ',' + cur.g + ',' + cur.b + ',' + cur.a + ')';
+    swatchLabel.textContent = hex.toUpperCase();
+    swatchLabel.style.color = contrast(cur, { r: 255, g: 255, b: 255 }) >= 3.5 ? '#fff' : '#1B2A3A';
+    swatchLabel.style.textShadow = contrast(cur, { r: 255, g: 255, b: 255 }) >= 3.5
+      ? '0 1px 6px rgba(0,0,0,.45)' : 'none';
+
+    if (skipField !== 'hex') fHex.value = hex.toUpperCase();
+    if (skipField !== 'rgb') fRgb.value = 'rgb(' + cur.r + ', ' + cur.g + ', ' + cur.b + ')';
+    if (skipField !== 'hsl') fHsl.value = hslStr(cur);
+
+    alphaVal.textContent = Math.round(cur.a * 100) + '%';
+    if (skipField !== 'alpha') fAlpha.value = Math.round(cur.a * 100);
+
+    picker.value = hex;
+
+    renderVals();
+
+    var cw = contrast(cur, { r: 255, g: 255, b: 255 });
+    var cb = contrast(cur, { r: 0, g: 0, b: 0 });
+    document.getElementById('boxWhite').style.background = hex;
+    document.getElementById('boxBlack').style.background = hex;
+    document.getElementById('cw').textContent = cw.toFixed(2) + ' : 1' +
+      (cw >= 4.5 ? '（达标）' : cw >= 3 ? '（仅大号字）' : '（偏低）');
+    document.getElementById('cb').textContent = cb.toFixed(2) + ' : 1' +
+      (cb >= 4.5 ? '（达标）' : cb >= 3 ? '（仅大号字）' : '（偏低）');
+
+    stat.textContent = 'R ' + cur.r + ' · G ' + cur.g + ' · B ' + cur.b +
+      ' · 亮度 ' + Math.round(lum(cur) * 100) + '%';
+  }
+
+  function apply(c, skipField) {
+    if (!c) return false;
+    cur.r = c.r; cur.g = c.g; cur.b = c.b;
+    if (c.a !== null && c.a !== undefined) cur.a = c.a;
+    renderAll(skipField);
+    return true;
+  }
+
+  function onField(el, name) {
+    var commit = function () {
+      var c = parseAny(el.value);
+      if (!c) {
+        showMsg('err', '这串颜色没认出来：' + el.value);
+        el.classList.add('bad');
+        return;
+      }
+      el.classList.remove('bad');
+      hideMsg();
+      apply(c, name);
+    };
+    el.addEventListener('blur', commit);
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); commit(); }
+    });
+  }
+
+  onField(fHex, 'hex');
+  onField(fRgb, 'rgb');
+  onField(fHsl, 'hsl');
+
+  fAlpha.addEventListener('input', function () {
+    cur.a = clamp(parseInt(fAlpha.value, 10) / 100, 0, 1);
+    renderAll('alpha');
+  });
+
+  picker.addEventListener('input', function () {
+    var c = parseHex(picker.value);
+    if (c) { apply(c); hideMsg(); }
+  });
+
+  swatch.addEventListener('click', function () { picker.click(); });
+
+  document.querySelector('.tool-panel .bar').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-act]');
+    if (!b) return;
+    var a = b.getAttribute('data-act');
+    if (a === 'copyHex') copy(hexStr(cur).toUpperCase(), b);
+    if (a === 'reset') {
+      apply({ r: 232, g: 151, b: 58, a: 1 });
+      hideMsg();
+    }
+  });
+
+  // ---------- 色板 ----------
+  var PALETTE = [
+    ['#E8973A', '琥珀'], ['#FFC46B', '浅琥珀'], ['#4A90D9', '海蓝'],
+    ['#2B3A4A', '墨蓝'], ['#3DDC97', '薄荷'], ['#E5484D', '警示红'],
+    ['#A06BFF', '紫罗兰'], ['#12A06A', '深绿'], ['#F5C542', '柠檬'],
+    ['#6F9CFF', '天蓝'], ['#FF8FA3', '樱粉'], ['#FFFFFF', '白'],
+    ['#E8ECF2', '浅灰'], ['#8D97A8', '中灰'], ['#1E2430', '深灰'],
+    ['#000000', '黑']
+  ];
+  var pal = document.getElementById('palette');
+  PALETTE.forEach(function (p) {
+    var sw = document.createElement('button');
+    sw.className = 'sw';
+    sw.title = p[1] + ' ' + p[0];
+    sw.style.background = p[0];
+    sw.addEventListener('click', function () {
+      var c = parseHex(p[0]);
+      if (c) { apply(c); hideMsg(); }
+    });
+    pal.appendChild(sw);
+  });
+
+  renderAll();
+})();
+</script>
+</body>
+</html>
