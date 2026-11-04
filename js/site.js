@@ -61,7 +61,7 @@
   console.log.apply(console, [out].concat(styles));
 
   // 签名
-  console.log('%c 二 次 可 能 SECOND',
+  console.log('%c 二 次 可 能 S E C O N D',
     'background:linear-gradient(90deg,#FFC46B,#E8973A);color:#1B2A3A;' +
     'padding:4px 14px;border-radius:999px;font-weight:700;font-size:13px;letter-spacing:2px;');
 
@@ -85,6 +85,9 @@
       'color:#7A8B9C;font-size:12px;font-style:italic;');
      //stop
     console.log('%c   结束游戏：eat_fish_together.stop()',
+      'color:#7A8B9C;font-size:12px;font-style:italic;');
+     // start
+     console.log('%c   感谢小鱼yuzifu的gitee开源仓库',
       'color:#7A8B9C;font-size:12px;font-style:italic;');
   }
 
