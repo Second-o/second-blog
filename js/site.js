@@ -61,7 +61,7 @@
   console.log.apply(console, [out].concat(styles));
 
   // 签名
-  console.log('%c 二 次 可 能 ',
+  console.log('%c 二 次 可 能 SECOND',
     'background:linear-gradient(90deg,#FFC46B,#E8973A);color:#1B2A3A;' +
     'padding:4px 14px;border-radius:999px;font-weight:700;font-size:13px;letter-spacing:2px;');
 
