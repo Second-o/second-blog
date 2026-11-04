@@ -70,7 +70,7 @@
 
   var desc = [
     '既然会打开控制台，说明我们都是喜欢折腾的人。',
-    '这个网站是我自己从零手写的'，
+    '这个网站是我自己从零手写的',
     '有问题想聊？QQ 3980136315 · Secondo__@outlook.com'
   ].join(NL);
   console.log('%c' + desc, 'color:#A8BCD0;font-size:12px;line-height:1.8;');
