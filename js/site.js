@@ -65,13 +65,12 @@
     'background:linear-gradient(90deg,#FFC46B,#E8973A);color:#1B2A3A;' +
     'padding:4px 14px;border-radius:999px;font-weight:700;font-size:13px;letter-spacing:2px;');
 
-  console.log('%c嘿，你居然翻到这儿了 👀',
+  console.log('%c嘿bro，你居然翻到这儿了 👀',
     'color:#FFC46B;font-size:14px;font-weight:600;margin-top:6px;');
 
   var desc = [
     '既然会打开控制台，说明我们都是喜欢折腾的人。',
-    '这个网站是我自己从零手写的：背景是 Minecraft 里的雨夜小屋，',
-    '图标是村民，播放器接的是我的 B 站投稿。',
+    '这个网站是我自己从零手写的'，
     '有问题想聊？QQ 3980136315 · Secondo__@outlook.com'
   ].join(NL);
   console.log('%c' + desc, 'color:#A8BCD0;font-size:12px;line-height:1.8;');
