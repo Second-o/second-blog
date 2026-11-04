@@ -77,9 +77,13 @@
 
   // 小游戏彩蛋提示（仅在游戏脚本加载成功时出现）
   if (typeof window.eat_fish_together === 'function') {
-    console.log('%c🎮 彩蛋：在控制台输入 eat_fish_together() 开始「一起吃小鱼」',
-      'background:rgba(232,151,58,.16);color:#C9751F;padding:6px 12px;border-radius:8px;' +
-      'font-size:13px;font-weight:600;border:1px solid rgba(232,151,58,.45);');
+     // help
+    console.log('%c   帮助：eat_fish_together.help()',
+      'color:#7A8B9C;font-size:12px;font-style:italic;');
+     // start
+     console.log('%c   开始游戏：eat_fish_together()',
+      'color:#7A8B9C;font-size:12px;font-style:italic;');
+     //stop
     console.log('%c   结束游戏：eat_fish_together.stop()',
       'color:#7A8B9C;font-size:12px;font-style:italic;');
   }
